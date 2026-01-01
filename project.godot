@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="FNAF Quiz"
-run/main_scene="uid://drnbcjol35a6w"
+run/main_scene="uid://dtnm54c7bo3a4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[gui]
+
+theme/custom_font="uid://bqwvom02ltr1h"
 
 [input]
 
@@ -22,3 +26,7 @@ debug={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":96,"location":0,"echo":false,"script":null)
 ]
 }
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

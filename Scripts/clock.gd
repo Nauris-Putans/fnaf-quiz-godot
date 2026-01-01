@@ -14,7 +14,6 @@ var _run_id: int = 0
 
 func _ready():
 	start()
-	_start_counting.call_deferred(_run_id)
 
 func start() -> void:
 	_run_id += 1

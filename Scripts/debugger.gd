@@ -16,13 +16,13 @@ signal random_question_button_pressed
 @onready var random_question: Button = %RandomQuestion
 
 func _process(_delta: float) -> void:
-	fps_label.text = str("FPS: ", Engine.get_frames_per_second())
+	fps_label.text = str("FPS = ", Engine.get_frames_per_second())
 	
 func on_hour_changed(text: String) -> void:
-	clock_label.text = "Clock: %s" % text
+	clock_label.text = "Clock = %s" % text
 
 func on_seconds_left_changed(seconds_left: int) -> void:
-	seconds_between_hour_label.text = "Next hour in: %d" % seconds_left
+	seconds_between_hour_label.text = "Next hour in = %d" % seconds_left
 
 func _on_win_pressed() -> void:
 	win_button_pressed.emit()
