@@ -37,6 +37,13 @@ script = ExtResource("1_jjgbg")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Clock" parent="UI" instance=ExtResource("2_bo1nx")]
+unique_name_in_owner = true
+
+[node name="Debugger" parent="UI" instance=ExtResource("3_8gbba")]
+unique_name_in_owner = true
+visible = false
+
 [node name="QuestionLabel" type="Label" parent="UI"]
 unique_name_in_owner = true
 offset_left = 426.0
@@ -81,9 +88,6 @@ text = "Answer 4"
 
 [node name="JumpscareAnimation" type="AnimationPlayer" parent="UI"]
 root_node = NodePath("../../..")
-
-[node name="Clock" parent="UI" instance=ExtResource("2_bo1nx")]
-unique_name_in_owner = true
 
 [node name="GameOver" type="ColorRect" parent="UI"]
 unique_name_in_owner = true
@@ -179,18 +183,13 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Play again"
 
-[node name="Debugger" parent="UI" instance=ExtResource("3_8gbba")]
-unique_name_in_owner = true
-visible = false
-
 [connection signal="hour_changed" from="UI/Clock" to="UI/Debugger" method="on_hour_changed"]
 [connection signal="seconds_left_changed" from="UI/Clock" to="UI/Debugger" method="on_seconds_left_changed"]
 [connection signal="six_am_reached" from="UI/Clock" to="GameManager" method="_on_clock_six_am_reached"]
-[connection signal="pressed" from="UI/GameOver/PanelContainer/MarginContainer/VBoxContainer/Restart" to="GameManager" method="_on_button_restart_pressed"]
-[connection signal="pressed" from="UI/Win/PanelContainer/MarginContainer/VBoxContainer/PlayAgain" to="GameManager" method="_on_button_restart_pressed"]
 [connection signal="jumpscare_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_jumpscare_button_pressed"]
 [connection signal="lose_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_lose_button_pressed"]
 [connection signal="random_question_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_random_question_button_pressed"]
-[connection signal="time_passed_buttton_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_time_passed_buttton_pressed"]
 [connection signal="time_passed_buttton_pressed" from="UI/Debugger" to="UI/Clock" method="_on_debugger_time_passed_buttton_pressed"]
 [connection signal="win_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_win_button_pressed"]
+[connection signal="pressed" from="UI/GameOver/PanelContainer/MarginContainer/VBoxContainer/Restart" to="GameManager" method="_on_button_restart_pressed"]
+[connection signal="pressed" from="UI/Win/PanelContainer/MarginContainer/VBoxContainer/PlayAgain" to="GameManager" method="_on_button_restart_pressed"]

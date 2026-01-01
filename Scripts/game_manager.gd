@@ -93,9 +93,6 @@ func showAnswers():
 func _on_button_pressed(index : int) -> void:
 	if index == questionArray[current_question].get("correct", -1):
 		current_question += 1
-		
-		print(questionArray.size())
-		print(current_question)
 
 		if current_question >= questionArray.size():
 			on_you_survived()
