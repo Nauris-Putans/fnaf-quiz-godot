@@ -9,6 +9,5 @@ func _on_settings_pressed() -> void:
 func _on_credits_pressed() -> void:
 	SceneManager.swap_scenes("res://Scenes/credits.tscn",get_tree().root,self,"fade_to_black")
 
-
 func _on_exit_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().quit()
