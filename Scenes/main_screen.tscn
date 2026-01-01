@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dtnm54c7bo3a4"]
+[gd_scene load_steps=2 format=3 uid="uid://dtnm54c7bo3a4"]
+
+[ext_resource type="Script" uid="uid://cnuq3o8lrhk62" path="res://Scripts/main_screen.gd" id="1_p8vjv"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_p8vjv")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -18,7 +21,8 @@ offset_top = 98.0
 offset_right = 297.0
 offset_bottom = 175.0
 grow_horizontal = 2
-theme_override_constants/outline_size = 12
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 6
 theme_override_font_sizes/font_size = 36
 text = "Five Nights at Freddy's Quiz"
 horizontal_alignment = 1
@@ -57,3 +61,8 @@ text = "Credits"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

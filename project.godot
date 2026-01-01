@@ -15,9 +15,13 @@ run/main_scene="uid://dtnm54c7bo3a4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SceneManager="*res://Autoloads/SceneManager.gd"
+
 [gui]
 
-theme/custom_font="uid://bqwvom02ltr1h"
+theme/custom_font="uid://3dg22q076377"
 
 [input]
 

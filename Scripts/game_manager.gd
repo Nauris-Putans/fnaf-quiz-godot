@@ -61,11 +61,12 @@ var questionArray: Array = [
 	}
 ]
 
-
 func _ready() -> void:
 	Engine.time_scale = 1
+	current_question = 0
 	game_over_screen.hide()
 	win_screen.hide()
+	randomizeQuestions()
 	showQuestion()
 	showAnswers()
 
@@ -78,7 +79,6 @@ func randomizeQuestions() -> void:
 	questionArray.shuffle()
 
 func showQuestion():
-	randomizeQuestions()
 	question_label.text = questionArray[current_question].get("question")
 	
 func showAnswers():
@@ -90,7 +90,7 @@ func showAnswers():
 		
 		index += 1
 
-func _on_button_pressed(index : int) -> void:
+func _on_button_pressed(index: int) -> void:
 	if index == questionArray[current_question].get("correct", -1):
 		current_question += 1
 
@@ -113,7 +113,12 @@ func on_you_survived():
 
 func _on_button_restart_pressed() -> void:
 	Engine.time_scale = 1
-	get_tree().reload_current_scene()
+	SceneManager.swap_scenes(
+	"res://Scenes/main_screen.tscn",
+	get_tree().root,
+	get_tree().current_scene,
+	"fade_to_black"
+	)
 
 func _on_clock_six_am_reached() -> void:
 	on_you_survived()
