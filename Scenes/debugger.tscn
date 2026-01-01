@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0svccjkkxd00"]
+
+[ext_resource type="Script" uid="uid://dv6ivgj71eqbd" path="res://Scripts/debugger.gd" id="1_o1vrb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1vrb"]
+bg_color = Color(0.08627451, 0.2901961, 0.6, 0.39215687)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Debugger" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 209.0
+offset_bottom = 281.0
+script = ExtResource("1_o1vrb")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 254.0
+offset_bottom = 335.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o1vrb")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Debug tool"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Fps" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "FPS: 60"
+
+[node name="CurrentHour" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Current hour: 12AM"
+
+[node name="SecondsBetweenHour" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Seconds between hour: 1"
+
+[node name="VFlowContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+z_index = 4096
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Win" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Win"
+
+[node name="Lose" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lose
+"
+
+[node name="TimePassed" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pass time till 6AM"
+
+[node name="Jumpscare" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Jumpscare"
+
+[node name="RandomQuestion" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Random question"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Win" to="." method="_on_win_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Lose" to="." method="_on_lose_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/TimePassed" to="." method="_on_time_passed_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Jumpscare" to="." method="_on_jumpscare_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/RandomQuestion" to="." method="_on_random_question_pressed"]
