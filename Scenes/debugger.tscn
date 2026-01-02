@@ -18,8 +18,8 @@ corner_radius_bottom_left = 4
 [node name="Debugger" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 209.0
-offset_bottom = 281.0
+offset_right = 256.0
+offset_bottom = 434.0
 script = ExtResource("1_o1vrb")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -85,10 +85,15 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Pass time till 6AM"
 
-[node name="Jumpscare" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+[node name="JumpscareOn" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Jumpscare"
+text = "Jumpscare on"
+
+[node name="JumpscareOff" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Jumpscare off"
 
 [node name="RandomQuestion" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
@@ -98,5 +103,6 @@ text = "Random question"
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Lose" to="." method="_on_lose_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/TimePassed" to="." method="_on_time_passed_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Jumpscare" to="." method="_on_jumpscare_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/JumpscareOn" to="." method="_on_jumpscare_on_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/JumpscareOff" to="." method="_on_jumpscare_off_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/RandomQuestion" to="." method="_on_random_question_pressed"]

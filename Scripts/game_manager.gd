@@ -6,6 +6,7 @@ extends Node
 @onready var win_screen: ColorRect = %Win
 @onready var debugger: Control = %Debugger
 @onready var clock: Control = %Clock
+@onready var jumpscare: Jumpscare = %Jumpscare
 
 var current_question: int = 0
 var questionArray: Array = [
@@ -66,6 +67,7 @@ func _ready() -> void:
 	current_question = 0
 	game_over_screen.hide()
 	win_screen.hide()
+	jumpscare.hide()
 	randomizeQuestions()
 	showQuestion()
 	showAnswers()
@@ -132,5 +134,9 @@ func _on_debugger_random_question_button_pressed() -> void:
 func _on_debugger_lose_button_pressed() -> void:
 	on_game_over()
 
-func _on_debugger_jumpscare_button_pressed() -> void:
-	pass # Replace with function body.
+func _on_debugger_jumpscare_on_button_pressed() -> void:
+	jumpscare.play_animation()
+
+func _on_debugger_jumpscare_off_button_pressed() -> void:
+	jumpscare.hide()
+	Engine.time_scale = 1

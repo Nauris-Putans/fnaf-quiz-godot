@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://Autoloads/SceneManager.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+
 [gui]
 
 theme/custom_font="uid://3dg22q076377"

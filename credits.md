@@ -44,3 +44,7 @@ The following resources were used for inspiration, guidance, and technical refer
 
 All original code and pixel-art assets were created specifically for this project.  
 Any external resources listed above were used strictly for learning and inspiration.
+
+
+https://www.youtube.com/watch?v=tFsETEP01k8 - Aseprite Tutorial For Beginners (Pixel Art)
+https://www.youtube.com/watch?v=B0enS9BJne4 - Aseprite Animation Tutorial (Pixel Art)

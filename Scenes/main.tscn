@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=7 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://cgnw2g6q5qbu0" path="res://Scripts/game_manager.gd" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://b8p0plxounngf" path="res://Scenes/clock.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://d0svccjkkxd00" path="res://Scenes/debugger.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1nx"]
 bg_color = Color(0.65034926, 0.12277395, 0.12776203, 1)
@@ -185,10 +186,15 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Play again"
 
+[node name="Jumpscare" parent="UI" instance=ExtResource("4_jjvhh")]
+unique_name_in_owner = true
+visible = false
+
 [connection signal="hour_changed" from="UI/Clock" to="UI/Debugger" method="on_hour_changed"]
 [connection signal="seconds_left_changed" from="UI/Clock" to="UI/Debugger" method="on_seconds_left_changed"]
 [connection signal="six_am_reached" from="UI/Clock" to="GameManager" method="_on_clock_six_am_reached"]
-[connection signal="jumpscare_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_jumpscare_button_pressed"]
+[connection signal="jumpscare_off_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_jumpscare_off_button_pressed"]
+[connection signal="jumpscare_on_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_jumpscare_on_button_pressed"]
 [connection signal="lose_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_lose_button_pressed"]
 [connection signal="random_question_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_random_question_button_pressed"]
 [connection signal="time_passed_buttton_pressed" from="UI/Debugger" to="UI/Clock" method="_on_debugger_time_passed_buttton_pressed"]

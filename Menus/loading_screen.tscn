@@ -534,6 +534,7 @@ _data = {
 }
 
 [node name="LoadingScreen" type="Node2D"]
+z_index = 4096
 script = ExtResource("1_k5r6i")
 
 [node name="Control" type="Control" parent="."]

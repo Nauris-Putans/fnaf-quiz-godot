@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsfk1ciim4bp8"]
+
+[ext_resource type="Texture2D" uid="uid://bmgok68slofuk" path="res://Assets/Characters/freddy_fazbear-Sheet.png" id="1_s623n"]
+[ext_resource type="Script" uid="uid://bwlo77ul3i1cx" path="res://Scripts/jumpscare.gd" id="1_xq14c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xryxp"]
+atlas = ExtResource("1_s623n")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7gob"]
+atlas = ExtResource("1_s623n")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp1y2"]
+atlas = ExtResource("1_s623n")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5w2m"]
+atlas = ExtResource("1_s623n")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1583"]
+atlas = ExtResource("1_s623n")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oeogh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xryxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7gob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp1y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5w2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1583")
+}],
+"loop": false,
+"name": &"jumpscare",
+"speed": 8.0
+}]
+
+[node name="Jumpscare" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xq14c")
+
+[node name="Freddy" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 71)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_oeogh")
+animation = &"jumpscare"
+
+[connection signal="animation_finished" from="Freddy" to="." method="_on_freddy_animation_finished"]
