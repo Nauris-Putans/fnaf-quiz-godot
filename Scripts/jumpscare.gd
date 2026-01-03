@@ -16,6 +16,7 @@ func play_animation() -> void:
 	show()
 	freddy.stop()
 	freddy.frame = 0
+	AudioManager.play("Jumpscare")
 	freddy.play("jumpscare")
 
 

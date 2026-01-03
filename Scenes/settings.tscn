@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://63a5s3tk6gtv"]
+[gd_scene load_steps=6 format=3 uid="uid://63a5s3tk6gtv"]
 
 [ext_resource type="Script" uid="uid://bca4ri4k216mk" path="res://Scripts/settings.gd" id="1_4geyq"]
+[ext_resource type="Script" uid="uid://br4cw8g7n5umu" path="res://Scripts/audio_manager.gd" id="2_lhmql"]
+[ext_resource type="Script" uid="uid://yu4dw8dpu7l1" path="res://Scripts/full_screen_control.gd" id="3_aaqfp"]
 
-[node name="Credits" type="Control"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_lhmql"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_aaqfp"]
+color = Color(0.41929418, 0.5380844, 1, 1)
+thickness = 6
+
+[node name="Settings" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,27 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4geyq")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.0
-offset_top = -102.0
-offset_right = 143.0
-offset_bottom = 102.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 12
-
-[node name="Back" type="Button" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Back"
-
-[node name="Label" type="Label" parent="."]
+[node name="SettingsLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -47,4 +37,113 @@ theme_override_font_sizes/font_size = 36
 text = "Settings"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -149.0
+offset_right = 225.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Master"
+horizontal_alignment = 1
+
+[node name="MasterSlider2" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_lhmql")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_aaqfp")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_aaqfp")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("2_lhmql")
+audio_bus_name = "Master"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Music"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_lhmql")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_aaqfp")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_aaqfp")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("2_lhmql")
+audio_bus_name = "Music"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_lhmql")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_aaqfp")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_aaqfp")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("2_lhmql")
+audio_bus_name = "SFX"
+metadata/_edit_use_anchors_ = true
+
+[node name="FullScreenControl" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Full screen"
+script = ExtResource("3_aaqfp")
+
+[node name="Back" type="Button" parent="Panel/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+text = "Back"
+
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" method="_on_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" method="_on_value_changed"]
+[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer2/FullScreenControl" to="Panel/MarginContainer/VBoxContainer2/FullScreenControl" method="_on_toggled"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]

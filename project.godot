@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://Autoloads/SceneManager.gd"
 GameManager="*res://Autoloads/GameManager.gd"
+AudioManager="*res://Scenes/audio_manager.tscn"
+
+[display]
+
+window/size/mode=3
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

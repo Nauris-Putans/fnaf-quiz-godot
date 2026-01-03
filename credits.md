@@ -48,3 +48,6 @@ Any external resources listed above were used strictly for learning and inspirat
 
 https://www.youtube.com/watch?v=tFsETEP01k8 - Aseprite Tutorial For Beginners (Pixel Art)
 https://www.youtube.com/watch?v=B0enS9BJne4 - Aseprite Animation Tutorial (Pixel Art)
+https://www.youtube.com/watch?v=EheekoQZ_nE&t=1389s - SETTINGS MENU in Godot
+https://www.youtube.com/watch?v=xe5IJgggbVI - Godot - Audio Manager - Tutorial
+https://www.youtube.com/watch?v=Egf2jgET3nQ, https://github.com/Aarimous/AudioManager - How I do Sound Effects in Godot

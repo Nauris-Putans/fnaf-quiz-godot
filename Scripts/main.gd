@@ -6,6 +6,7 @@ extends Control
 @onready var jumpscare: Jumpscare = %Jumpscare
 @onready var clock: Clock = %Clock
 
+
 func _ready():
 	hide_all()
 
@@ -64,9 +65,11 @@ func _on_answers_changed(answers: Array) -> void:
 		if button:
 			button.text = str(answers[index])
 
+
 func _on_question_randomize() -> void:
 	print("_on_question_randomize")
 	GameManager.randomize_questions_and_emit_current()
+
 
 func _on_answer_pressed(index: int) -> void:
 	GameManager.player_answer(index)
@@ -77,7 +80,7 @@ func _on_game_won() -> void:
 
 
 func _on_game_lost() -> void:
-	transition_to_end_screen(false)
+	jumpscare.play_animation()
 
 
 func transition_to_end_screen(won: bool) -> void:
