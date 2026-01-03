@@ -1,31 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=5 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://cgnw2g6q5qbu0" path="res://Scripts/game_manager.gd" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://b8p0plxounngf" path="res://Scenes/clock.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://d0svccjkkxd00" path="res://Scenes/debugger.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1nx"]
-bg_color = Color(0.65034926, 0.12277395, 0.12776203, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
-bg_color = Color(0.6, 0.84313726, 0.31764707, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -44,6 +22,7 @@ unique_name_in_owner = true
 [node name="Debugger" parent="UI" instance=ExtResource("3_8gbba")]
 unique_name_in_owner = true
 visible = false
+z_index = 4096
 
 [node name="QuestionLabel" type="Label" parent="UI"]
 unique_name_in_owner = true
@@ -92,103 +71,8 @@ text = "Answer 4"
 [node name="JumpscareAnimation" type="AnimationPlayer" parent="UI"]
 root_node = NodePath("../../..")
 
-[node name="GameOver" type="ColorRect" parent="UI"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.39215687)
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/GameOver"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -131.0
-offset_right = 150.0
-offset_bottom = 143.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bo1nx")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/GameOver/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 64
-
-[node name="Label" type="Label" parent="UI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Game over!"
-horizontal_alignment = 1
-
-[node name="Restart" type="Button" parent="UI/GameOver/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Restart"
-
-[node name="Win" type="ColorRect" parent="UI"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.39215687)
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Win"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -131.0
-offset_right = 150.0
-offset_bottom = 143.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_8gbba")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Win/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Win/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 64
-
-[node name="Label" type="Label" parent="UI/Win/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "You survived!"
-horizontal_alignment = 1
-
-[node name="PlayAgain" type="Button" parent="UI/Win/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Play again"
-
 [node name="Jumpscare" parent="UI" instance=ExtResource("4_jjvhh")]
 unique_name_in_owner = true
-visible = false
 
 [connection signal="hour_changed" from="UI/Clock" to="UI/Debugger" method="on_hour_changed"]
 [connection signal="seconds_left_changed" from="UI/Clock" to="UI/Debugger" method="on_seconds_left_changed"]
@@ -199,5 +83,3 @@ visible = false
 [connection signal="random_question_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_random_question_button_pressed"]
 [connection signal="time_passed_buttton_pressed" from="UI/Debugger" to="UI/Clock" method="_on_debugger_time_passed_buttton_pressed"]
 [connection signal="win_button_pressed" from="UI/Debugger" to="GameManager" method="_on_debugger_win_button_pressed"]
-[connection signal="pressed" from="UI/GameOver/PanelContainer/MarginContainer/VBoxContainer/Restart" to="GameManager" method="_on_button_restart_pressed"]
-[connection signal="pressed" from="UI/Win/PanelContainer/MarginContainer/VBoxContainer/PlayAgain" to="GameManager" method="_on_button_restart_pressed"]
