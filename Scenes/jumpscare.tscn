@@ -52,10 +52,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g1583")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1583")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1583")
 }],
 "loop": false,
 "name": &"jumpscare",
-"speed": 8.0
+"speed": 20.0
 }]
 
 [node name="Jumpscare" type="Control"]
@@ -85,7 +91,7 @@ position = Vector2(0, 71)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_oeogh")
 animation = &"jumpscare"
-frame = 8
+frame = 10
 frame_progress = 1.0
 
 [connection signal="animation_finished" from="Freddy" to="." method="_on_freddy_animation_finished"]

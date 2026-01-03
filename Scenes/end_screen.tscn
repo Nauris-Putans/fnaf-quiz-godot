@@ -33,9 +33,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f2mtv")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Win" type="Control" parent="CanvasLayer"]
+[node name="Win" type="Control" parent="UI"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
@@ -43,7 +43,7 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Win"]
+[node name="ColorRect" type="ColorRect" parent="UI/Win"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +53,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.39215687)
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Win/ColorRect"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Win/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,36 +68,36 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f2mtv")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Win/ColorRect/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Win/ColorRect/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Win/ColorRect/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Win/ColorRect/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="Label" type="Label" parent="CanvasLayer/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "You survived!"
 horizontal_alignment = 1
 
-[node name="MainMenu" type="Button" parent="CanvasLayer/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="UI/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main menu"
 
-[node name="Lose" type="Control" parent="CanvasLayer"]
+[node name="Lost" type="Control" parent="UI"]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Lose"]
+[node name="ColorRect" type="ColorRect" parent="UI/Lost"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,7 +107,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.39215687)
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Lose/ColorRect"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Lost/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -122,24 +122,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_syso7")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Lose/ColorRect/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Lost/ColorRect/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Lose/ColorRect/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="Label" type="Label" parent="CanvasLayer/Lose/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Game over!"
 horizontal_alignment = 1
 
-[node name="Restart" type="Button" parent="CanvasLayer/Lose/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Restart"

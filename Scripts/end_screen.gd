@@ -2,7 +2,7 @@ extends Control
 
 class_name EndScreen
 
-@onready var lose: Control = %Lose
+@onready var lost: Control = %Lost
 @onready var win: Control = %Win
 @onready var main_menu_button: Button = %MainMenu
 @onready var restart_button: Button = %Restart
@@ -10,6 +10,12 @@ class_name EndScreen
 
 func _ready():
 	hide_all()
+
+	var won: bool = bool(GameManager.get_meta("last_result", false))
+	if won:
+		show_win_screen()
+	else:
+		show_lost_screen()
 
 	connect_once(main_menu_button.pressed, _on_main_menu_pressed)
 	connect_once(restart_button.pressed, _on_restart_pressed)
@@ -23,7 +29,7 @@ func connect_once(sig: Signal, handler: Callable) -> void:
 func hide_all() -> void:
 	hide()
 	win.hide()
-	lose.hide()
+	lost.hide()
 
 
 func show_win_screen() -> void:
@@ -32,16 +38,15 @@ func show_win_screen() -> void:
 	win.show()
 
 
-func show_lose_screen() -> void:
+func show_lost_screen() -> void:
 	hide_all()
 	show()
-	lose.show()
-
+	lost.show()
 
 
 func _on_main_menu_pressed() -> void:
 	SceneManager.swap_scenes(
-		"res://Scenes/main_menu.tscn",
+		"res://Scenes/main_screen.tscn",
 		get_tree().root,
 		get_tree().current_scene,
 		"fade_to_black",
