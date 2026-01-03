@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="FNAF Quiz"
-run/main_scene="uid://dtnm54c7bo3a4"
+run/main_scene="uid://5v7gf42yyugx"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -23,7 +25,6 @@ AudioManager="*res://Scenes/audio_manager.tscn"
 
 [display]
 
-window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [editor_plugins]

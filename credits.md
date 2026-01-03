@@ -51,3 +51,4 @@ https://www.youtube.com/watch?v=B0enS9BJne4 - Aseprite Animation Tutorial (Pixel
 https://www.youtube.com/watch?v=EheekoQZ_nE&t=1389s - SETTINGS MENU in Godot
 https://www.youtube.com/watch?v=xe5IJgggbVI - Godot - Audio Manager - Tutorial
 https://www.youtube.com/watch?v=Egf2jgET3nQ, https://github.com/Aarimous/AudioManager - How I do Sound Effects in Godot
+https://www.youtube.com/watch?v=aA2fhLHIsj0 - Intro Scene – Godot 4.4 Tutorial

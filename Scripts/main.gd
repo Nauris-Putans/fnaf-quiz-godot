@@ -11,7 +11,7 @@ func _ready():
 	hide_all()
 
 	debugger.win_button_pressed.connect(_on_game_won)
-	debugger.lose_button_pressed.connect(_on_game_lost)
+	debugger.lose_button_pressed.connect(transition_to_end_screen)
 	debugger.random_question_button_pressed.connect(_on_question_randomize)
 	clock.six_am_reached.connect(_on_game_won)
 
@@ -83,7 +83,7 @@ func _on_game_lost() -> void:
 	jumpscare.play_animation()
 
 
-func transition_to_end_screen(won: bool) -> void:
+func transition_to_end_screen(won: bool = false) -> void:
 	# Store result so end screen can read it
 	GameManager.set_meta("last_result", won)
 

@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://5v7gf42yyugx"]
+
+[ext_resource type="Script" uid="uid://dihar0p16xpno" path="res://Scripts/intro.gd" id="1_duh1u"]
+[ext_resource type="Texture2D" uid="uid://bo5ykg28ofj1p" path="res://HTML/index.png" id="2_alxvg"]
+
+[sub_resource type="Animation" id="Animation_hwjxs"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_geirw"]
+resource_name = "intro"
+length = 4.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rsiac"]
+_data = {
+&"RESET": SubResource("Animation_hwjxs"),
+&"intro": SubResource("Animation_geirw")
+}
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_duh1u")
+godot_icon_texture = ExtResource("2_alxvg")
+small_font_size = 18
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GodotIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_alxvg")
+stretch_mode = 5
+
+[node name="LineLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "LINE LABEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_rsiac")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_libraries_updated" from="AnimationPlayer" to="." method="_on_animation_player_animation_libraries_updated"]

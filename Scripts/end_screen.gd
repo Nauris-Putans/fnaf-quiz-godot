@@ -5,6 +5,7 @@ class_name EndScreen
 @onready var lost: Control = %Lost
 @onready var win: Control = %Win
 @onready var main_menu_button: Button = %MainMenu
+@onready var main_menu_button_2: Button = %MainMenu2
 @onready var restart_button: Button = %Restart
 
 
@@ -18,6 +19,7 @@ func _ready():
 		show_lost_screen()
 
 	connect_once(main_menu_button.pressed, _on_main_menu_pressed)
+	connect_once(main_menu_button_2.pressed, _on_main_menu_pressed)
 	connect_once(restart_button.pressed, _on_restart_pressed)
 
 
