@@ -7,6 +7,7 @@ class_name PauseMenu
 
 @onready var blur: AnimationPlayer = %Blur
 @onready var panel: PanelContainer = $PanelContainer
+@onready var clock: Clock = %Clock
 
 var paused: bool = false
 var settings_ui: Settings = null
@@ -53,9 +54,11 @@ func toggle_pause() -> void:
 	get_tree().paused = paused
 
 	if paused:
+		clock.clock_status()
 		show()
 		blur.play("blur")
 	else:
+		clock.clock_status()
 		blur.play_backwards("blur")
 		hide()
 

@@ -29,8 +29,6 @@ var _skipping := false
 
 
 func _ready():
-	print("icon export=", godot_icon_texture, " icon node texture=", godot_icon.texture)
-
 	line_label.modulate.a = 0.0
 	godot_icon.modulate.a = 0.0
 	godot_icon.hide()

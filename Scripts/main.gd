@@ -6,6 +6,7 @@ extends Control
 @onready var jumpscare: Jumpscare = %Jumpscare
 @onready var clock: Clock = %Clock
 
+
 func _ready():
 	hide_all()
 
@@ -13,6 +14,7 @@ func _ready():
 	debugger.lose_button_pressed.connect(transition_to_end_screen)
 	debugger.random_question_button_pressed.connect(_on_question_randomize)
 	clock.six_am_reached.connect(_on_game_won)
+	clock.current_hour_changed.connect(GameManager.on_hour_changed)
 
 	# Listen to GameManager updates
 	GameManager.question_changed.connect(_on_question_changed)

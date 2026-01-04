@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dv6ivgj71eqbd" path="res://Scripts/debugger.gd" id="1_o1vrb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1vrb"]
-bg_color = Color(0.08627451, 0.2901961, 0.6, 0.39215687)
+bg_color = Color(0.08627451, 0.2901961, 0.6, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2

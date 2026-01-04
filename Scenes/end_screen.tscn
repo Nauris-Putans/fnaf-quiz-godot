@@ -86,10 +86,12 @@ horizontal_alignment = 1
 [node name="MainMenu" type="Button" parent="UI/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Main menu"
 
 [node name="Lost" type="Control" parent="UI"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
