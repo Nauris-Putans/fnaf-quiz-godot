@@ -6,6 +6,10 @@ signal question_changed(question_text: String)
 signal answers_changed(answers: Array[String])
 signal answered_question_count(index: int)
 signal determine_question_timer
+signal difficulty_changed(difficulty: String)
+signal allowed_strikes_changed(allowed_strikes_count: int)
+signal correctly_answered_changed(correctly_answered_count: int)
+signal wrongly_answered_changed(wrongly_answered_count: int)
 
 var question_array: Array = [
 	# --- EASY (1–18) ---
@@ -324,14 +328,24 @@ var allowed_strikes: int = 3
 var current_wrong_answers = 0
 var current_question: int = 0
 var current_hour: int = 0
+var current_correct_answers: int = 0
+var difficulty = "easy"
 
 
 func start_run() -> void:
 	Engine.time_scale = 1
-	current_question = 0
+	reset_all_values()
 	_randomize_allowed_strikes_count()
-	_randomize_questions()
-	_emit_current()
+	randomize_questions_and_emit_current()
+
+
+func reset_all_values() -> void:
+	allowed_strikes = 1
+	current_wrong_answers = 0
+	current_correct_answers = 0
+	current_question = 0
+	current_hour = 0
+	difficulty = "easy"
 
 
 func _randomize_allowed_strikes_count() -> void:
@@ -346,8 +360,6 @@ func _randomize_allowed_strikes_count() -> void:
 	else:
 		allowed_strikes = 4
 
-	print("allowed_strikes = ", allowed_strikes)
-
 
 func randomize_questions_and_emit_current() -> void:
 	randomize()
@@ -355,24 +367,18 @@ func randomize_questions_and_emit_current() -> void:
 	_emit_current()
 
 
-func _randomize_questions() -> void:
-	# _get_questions_by_difficulty()
-	randomize()
-	question_array.shuffle()
-
-
 func on_hour_changed(hour: int) -> void:
 	current_hour = hour
-	print("GameManager: Hour changed to ", current_hour)
 
 
 func lose_game() -> void:
 	game_lost.emit()
 
 
-func _get_questions_by_difficulty(difficulty: String) -> Array:
+func _get_questions_by_difficulty() -> Array:
 	return question_array.filter(
-		func(element): return element["difficulty"] == difficulty
+		func(element):
+			return element["difficulty"] == determnie_game_difficulty_based_on_current_hour()
 	)
 
 
@@ -381,6 +387,7 @@ func player_answer(index: int) -> void:
 
 	if index == correct:
 		current_question += 1
+		current_correct_answers += 1
 
 		if current_question >= question_array.size():
 			game_won.emit()
@@ -394,19 +401,13 @@ func player_answer(index: int) -> void:
 		print("current_wrong_answers = ", current_wrong_answers)
 		print("allowed_strikes = ", allowed_strikes)
 
-		if current_wrong_answers > allowed_strikes:
+		if current_wrong_answers >= allowed_strikes:
 			game_lost.emit()
 
 		_emit_current()
 
-	determine_question_timer.emit()
 
-
-func _emit_current() -> void:
-	print("_emit_current")
-
-	# Determine difficulty based on current hour
-	var difficulty = "easy"
+func determnie_game_difficulty_based_on_current_hour() -> String:
 	if current_hour <= 2:
 		difficulty = "easy"
 	elif current_hour <= 4:
@@ -414,20 +415,30 @@ func _emit_current() -> void:
 	else:
 		difficulty = "hard"
 
+	return difficulty
+
+
+func _emit_current() -> void:
+	print("_emit_current")
+
 	# Get filtered questions
-	var filtered_questions = _get_questions_by_difficulty(difficulty)
+	var filtered_questions = _get_questions_by_difficulty()
 
 	# If we've gone through all questions of this difficulty, we might need to handle that
 	# For now, let's just pick a random one from the filtered list
 	if filtered_questions.size() > 0:
 		var random_index = randi() % filtered_questions.size()
 		var selected_question = filtered_questions[random_index]
-
 		var question = str(selected_question.get("question", ""))
 		var answer = selected_question.get("answers", [])
 
 		question_changed.emit(question)
 		answers_changed.emit(answer)
+		determine_question_timer.emit()
 		answered_question_count.emit(current_question)
+		difficulty_changed.emit(difficulty)
+		allowed_strikes_changed.emit(allowed_strikes)
+		wrongly_answered_changed.emit(current_wrong_answers)
+		correctly_answered_changed.emit(current_correct_answers)
 	else:
 		print("ERROR: No questions available for difficulty: ", difficulty)
