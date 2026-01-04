@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=6 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://xpskky06ja4y" path="res://Scripts/main.gd" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://b8p0plxounngf" path="res://Scenes/clock.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cnfpl88fjql2s" path="res://Scenes/pause_menu.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d0svccjkkxd00" path="res://Scenes/debugger.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
 
@@ -20,7 +21,7 @@ unique_name_in_owner = true
 [node name="Debugger" parent="UI" instance=ExtResource("3_8gbba")]
 unique_name_in_owner = true
 visible = false
-z_index = 4096
+z_index = 4000
 
 [node name="QuestionLabel" type="Label" parent="UI"]
 unique_name_in_owner = true
@@ -52,21 +53,32 @@ size_flags_vertical = 4
 
 [node name="AnswerButton1" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Answer 1"
 
 [node name="AnswerButton2" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Answer 2"
 
 [node name="AnswerButton3" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Answer 3"
 
 [node name="AnswerButton4" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Answer 4"
 
 [node name="Jumpscare" parent="UI" instance=ExtResource("4_jjvhh")]
+unique_name_in_owner = true
+visible = false
+
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PauseMenu" parent="PauseLayer" instance=ExtResource("2_kry3j")]
 unique_name_in_owner = true
 visible = false
 

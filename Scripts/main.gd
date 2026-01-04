@@ -6,7 +6,6 @@ extends Control
 @onready var jumpscare: Jumpscare = %Jumpscare
 @onready var clock: Clock = %Clock
 
-
 func _ready():
 	hide_all()
 
@@ -31,7 +30,7 @@ func _ready():
 
 
 func hide_all() -> void:
-	hide() # not sure about this
+	hide()
 	jumpscare.hide()
 	debugger.hide()
 

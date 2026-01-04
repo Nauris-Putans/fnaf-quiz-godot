@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ovdnf3fik7gx"]
+[gd_scene load_steps=3 format=3 uid="uid://ovdnf3fik7gx"]
 
 [ext_resource type="Script" uid="uid://ray17607junp" path="res://Autoloads/AudioManager.gd" id="1_4tj6f"]
-[ext_resource type="AudioStream" uid="uid://ch1nnf1j0vlvo" path="res://Assets/Audio/Music/main_music.wav" id="2_hhwve"]
 [ext_resource type="AudioStream" uid="uid://dwowcnilde2ac" path="res://Assets/Audio/Sfx/jumpscare.wav" id="3_hhwve"]
 
 [node name="AudioManager" type="Node"]
@@ -14,7 +13,6 @@ unique_name_in_owner = true
 
 [node name="Main" type="AudioStreamPlayer" parent="Clips"]
 unique_name_in_owner = true
-stream = ExtResource("2_hhwve")
 bus = &"Music"
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="Clips"]

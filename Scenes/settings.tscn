@@ -75,6 +75,7 @@ horizontal_alignment = 1
 [node name="MasterSlider2" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_lhmql")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_aaqfp")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_aaqfp")
@@ -98,6 +99,7 @@ horizontal_alignment = 1
 [node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_lhmql")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_aaqfp")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_aaqfp")
@@ -121,6 +123,7 @@ horizontal_alignment = 1
 [node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_lhmql")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_aaqfp")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_aaqfp")
@@ -133,6 +136,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="FullScreenControl" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer2"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Full screen"
 script = ExtResource("3_aaqfp")
 
@@ -140,6 +144,7 @@ script = ExtResource("3_aaqfp")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 10
+mouse_default_cursor_shape = 2
 text = "Back"
 
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" method="_on_value_changed"]

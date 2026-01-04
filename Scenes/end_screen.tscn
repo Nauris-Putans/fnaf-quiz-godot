@@ -139,9 +139,11 @@ horizontal_alignment = 1
 [node name="Restart" type="Button" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Restart"
 
 [node name="MainMenu2" type="Button" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Main menu"
