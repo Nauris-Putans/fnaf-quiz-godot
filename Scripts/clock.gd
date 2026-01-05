@@ -57,7 +57,6 @@ func clock_status() -> void:
 
 
 func determine_question_timer() -> void:
-	print("determine_question_timer - resetting timer for new question")
 	# Determine the timer value based on current hour
 	if current_hour <= 2:
 		question_timer = 25
@@ -65,8 +64,6 @@ func determine_question_timer() -> void:
 		question_timer = 20
 	else:
 		question_timer = 15
-
-	print("Question timer set to: ", question_timer, " seconds for hour ", current_hour)
 
 
 func _start_counting(run_id: int):

@@ -1,10 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=15 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://xpskky06ja4y" path="res://Scripts/main.gd" id="1_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="2_6bp64"]
+[ext_resource type="PackedScene" uid="uid://dgm4oxk6tkgp8" path="res://Scenes/shake_camera.tscn" id="2_21xkr"]
 [ext_resource type="PackedScene" uid="uid://b8p0plxounngf" path="res://Scenes/clock.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cnfpl88fjql2s" path="res://Scenes/pause_menu.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d0svccjkkxd00" path="res://Scenes/debugger.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
+atlas = ExtResource("2_6bp64")
+region = Rect2(0, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynf5e"]
+atlas = ExtResource("2_6bp64")
+region = Rect2(288, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hptm8"]
+atlas = ExtResource("2_6bp64")
+region = Rect2(576, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1ilt"]
+atlas = ExtResource("2_6bp64")
+region = Rect2(864, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyac"]
+atlas = ExtResource("2_6bp64")
+region = Rect2(1152, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdnlq"]
+atlas = ExtResource("2_6bp64")
+region = Rect2(1440, 0, 288, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jkdf5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_344ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynf5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hptm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1ilt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdnlq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -13,7 +65,38 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_jjvhh")
 
+[node name="ShakeCamera" parent="." node_paths=PackedStringArray("ui_layer") instance=ExtResource("2_21xkr")]
+unique_name_in_owner = true
+position = Vector2(576, 324)
+ui_layer = NodePath("../UI")
+
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScreenStatic" type="AnimatedSprite2D" parent="UI"]
+modulate = Color(1, 1, 1, 0.5764706)
+z_index = 10
+position = Vector2(576.00006, 324)
+scale = Vector2(3.9930558, 4)
+sprite_frames = SubResource("SpriteFrames_jkdf5")
+autoplay = "default"
+frame = 2
+frame_progress = 0.99812067
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"pending_changes": {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"scale": "1.0",
+"should_round_fps": true,
+"slice": "",
+"source": "",
+"source_uid": -1
+}
+}
 
 [node name="Clock" parent="UI" instance=ExtResource("2_bo1nx")]
 unique_name_in_owner = true

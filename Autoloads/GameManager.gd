@@ -10,6 +10,7 @@ signal difficulty_changed(difficulty: String)
 signal allowed_strikes_changed(allowed_strikes_count: int)
 signal correctly_answered_changed(correctly_answered_count: int)
 signal wrongly_answered_changed(wrongly_answered_count: int)
+signal camera_shake_amount(amount: float)
 
 var question_array: Array = [
 	# --- EASY (1–18) ---
@@ -382,6 +383,10 @@ func _get_questions_by_difficulty() -> Array:
 	)
 
 
+func determine_camera_shake_amount() -> float:
+	return clamp(0.25 + 0.15 * float(current_wrong_answers), 0.25, 0.7)
+
+
 func player_answer(index: int) -> void:
 	var correct: int = question_array[current_question].get("correct", -1)
 
@@ -398,8 +403,7 @@ func player_answer(index: int) -> void:
 		current_question += 1
 		current_wrong_answers += 1
 
-		print("current_wrong_answers = ", current_wrong_answers)
-		print("allowed_strikes = ", allowed_strikes)
+		camera_shake_amount.emit(determine_camera_shake_amount())
 
 		if current_wrong_answers >= allowed_strikes:
 			game_lost.emit()
@@ -419,7 +423,6 @@ func determnie_game_difficulty_based_on_current_hour() -> String:
 
 
 func _emit_current() -> void:
-	print("_emit_current")
 
 	# Get filtered questions
 	var filtered_questions = _get_questions_by_difficulty()

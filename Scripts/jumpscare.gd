@@ -27,7 +27,6 @@ func stop_animation() -> void:
 
 
 func _on_freddy_animation_finished() -> void:
-	print("_on_freddy_animation_finished")
 	GameManager.set_meta("last_result", false)
 
 	SceneManager.swap_scenes(

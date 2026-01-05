@@ -141,6 +141,9 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Random question"
 
+[node name="VFlowContainer" type="VFlowContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
+layout_mode = 2
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Lose" to="." method="_on_lose_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Time" to="." method="_on_toggle_time_pressed"]

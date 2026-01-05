@@ -5,6 +5,7 @@ extends Control
 @onready var debugger: Debugger = %Debugger
 @onready var jumpscare: Jumpscare = %Jumpscare
 @onready var clock: Clock = %Clock
+@onready var shake_camera: ShakeCamera = %ShakeCamera
 
 
 func _ready():
@@ -15,6 +16,8 @@ func _ready():
 	debugger.random_question_button_pressed.connect(_on_question_randomize)
 	clock.six_am_reached.connect(_on_game_won)
 	clock.current_hour_changed.connect(GameManager.on_hour_changed)
+
+	GameManager.camera_shake_amount.connect(perform_camera_shake)
 
 	# Listen to GameManager updates
 	GameManager.question_changed.connect(_on_question_changed)
@@ -68,7 +71,6 @@ func _on_answers_changed(answers: Array) -> void:
 
 
 func _on_question_randomize() -> void:
-	print("_on_question_randomize")
 	GameManager.randomize_questions_and_emit_current()
 
 
@@ -82,6 +84,10 @@ func _on_game_won() -> void:
 
 func _on_game_lost() -> void:
 	jumpscare.play_animation()
+
+
+func perform_camera_shake(amount: float) -> void:
+	shake_camera.add_trauma(amount)
 
 
 func transition_to_end_screen(won: bool = false) -> void:
