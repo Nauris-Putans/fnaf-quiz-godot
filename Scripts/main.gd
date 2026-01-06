@@ -6,6 +6,9 @@ extends Control
 @onready var jumpscare: Jumpscare = %Jumpscare
 @onready var clock: Clock = %Clock
 @onready var shake_camera: ShakeCamera = %ShakeCamera
+@onready var screen_static: AnimatedSprite2D = %ScreenStatic
+
+var allowed_strikes: int = 3
 
 
 func _ready():
@@ -18,6 +21,8 @@ func _ready():
 	clock.current_hour_changed.connect(GameManager.on_hour_changed)
 
 	GameManager.camera_shake_amount.connect(perform_camera_shake)
+	GameManager.wrongly_answered_changed.connect(update_screen_static)
+	GameManager.allowed_strikes_changed.connect(set_allowed_strikes)
 
 	# Listen to GameManager updates
 	GameManager.question_changed.connect(_on_question_changed)
@@ -38,6 +43,41 @@ func hide_all() -> void:
 	hide()
 	jumpscare.hide()
 	debugger.hide()
+	reset_screen_static()
+
+
+func reset_screen_static() -> void:
+	screen_static.hide()
+	screen_static.modulate.a = 0
+
+
+func update_screen_static(count: int) -> void:
+	if count == 0:
+		# No wrong answers - hide static
+		screen_static.hide()
+		screen_static.modulate.a = 0
+	else:
+		# Show static briefly with intensity
+		screen_static.show()
+
+		# Formula: fewer allowed_strikes = more intense static
+		var base_intensity = 1.0 / allowed_strikes
+		var alpha = count * base_intensity
+		screen_static.modulate.a = min(alpha, 0.8)
+
+		# Fade out after 1.5 seconds
+		await get_tree().create_timer(1).timeout
+
+		# Fade out animation
+		var tween = create_tween()
+		tween.tween_property(screen_static, "modulate:a", 0.0, 0.5)
+		await tween.finished
+
+		screen_static.hide()
+
+
+func set_allowed_strikes(strikes: int) -> void:
+	allowed_strikes = strikes
 
 
 # Toggle debbuger

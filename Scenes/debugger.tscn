@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0svccjkkxd00"]
+[gd_scene load_steps=5 format=3 uid="uid://d0svccjkkxd00"]
 
 [ext_resource type="Script" uid="uid://dv6ivgj71eqbd" path="res://Scripts/debugger.gd" id="1_o1vrb"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_8mt3e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1vrb"]
 bg_color = Color(0.08627451, 0.2901961, 0.6, 1)
@@ -103,6 +104,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Win"
+script = ExtResource("2_8mt3e")
 
 [node name="Lose" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
@@ -110,39 +112,42 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Lose
 "
+script = ExtResource("2_8mt3e")
 
 [node name="Time" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Stop time"
+script = ExtResource("2_8mt3e")
 
 [node name="TimePassed" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Pass time till 6AM"
+script = ExtResource("2_8mt3e")
 
 [node name="JumpscareOn" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Jumpscare on"
+script = ExtResource("2_8mt3e")
 
 [node name="JumpscareOff" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Jumpscare off"
+script = ExtResource("2_8mt3e")
 
 [node name="RandomQuestion" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Random question"
-
-[node name="VFlowContainer" type="VFlowContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer"]
-layout_mode = 2
+script = ExtResource("2_8mt3e")
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VFlowContainer/Lose" to="." method="_on_lose_pressed"]

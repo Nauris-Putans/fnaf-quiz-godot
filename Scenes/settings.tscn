@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://63a5s3tk6gtv"]
+[gd_scene load_steps=7 format=3 uid="uid://63a5s3tk6gtv"]
 
 [ext_resource type="Script" uid="uid://bca4ri4k216mk" path="res://Scripts/settings.gd" id="1_4geyq"]
 [ext_resource type="Script" uid="uid://br4cw8g7n5umu" path="res://Scripts/audio_manager.gd" id="2_lhmql"]
 [ext_resource type="Script" uid="uid://yu4dw8dpu7l1" path="res://Scripts/full_screen_control.gd" id="3_aaqfp"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="4_aaqfp"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lhmql"]
 color = Color(1, 1, 1, 1)
@@ -146,6 +147,7 @@ layout_mode = 2
 size_flags_vertical = 10
 mouse_default_cursor_shape = 2
 text = "Back"
+script = ExtResource("4_aaqfp")
 
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" method="_on_value_changed"]
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" method="_on_value_changed"]

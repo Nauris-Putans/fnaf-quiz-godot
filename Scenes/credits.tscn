@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://g8gfp0cnhlar"]
+[gd_scene load_steps=3 format=3 uid="uid://g8gfp0cnhlar"]
 
 [ext_resource type="Script" uid="uid://c0dshlx2orynp" path="res://Scripts/credits.gd" id="1_r18jl"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_gryuy"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -31,6 +32,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Back"
+script = ExtResource("2_gryuy")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

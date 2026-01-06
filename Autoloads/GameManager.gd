@@ -331,6 +331,7 @@ var current_question: int = 0
 var current_hour: int = 0
 var current_correct_answers: int = 0
 var difficulty = "easy"
+var current_question_data: Dictionary = { }
 
 
 func start_run() -> void:
@@ -388,27 +389,29 @@ func determine_camera_shake_amount() -> float:
 
 
 func player_answer(index: int) -> void:
-	var correct: int = question_array[current_question].get("correct", -1)
+	var correct: int = int(current_question_data.get("correct", -1))
 
 	if index == correct:
-		current_question += 1
+		AudioManager.play("Correct")
 		current_correct_answers += 1
+		correctly_answered_changed.emit(current_correct_answers)
 
 		if current_question >= question_array.size():
 			game_won.emit()
 			return
 
-		_emit_current()
 	else:
-		current_question += 1
+		AudioManager.play("Incorrect")
 		current_wrong_answers += 1
-
+		wrongly_answered_changed.emit(current_wrong_answers)
 		camera_shake_amount.emit(determine_camera_shake_amount())
 
 		if current_wrong_answers >= allowed_strikes:
 			game_lost.emit()
+			return
 
-		_emit_current()
+	current_question += 1
+	_emit_current()
 
 
 func determnie_game_difficulty_based_on_current_hour() -> String:
@@ -423,7 +426,6 @@ func determnie_game_difficulty_based_on_current_hour() -> String:
 
 
 func _emit_current() -> void:
-
 	# Get filtered questions
 	var filtered_questions = _get_questions_by_difficulty()
 
@@ -432,6 +434,9 @@ func _emit_current() -> void:
 	if filtered_questions.size() > 0:
 		var random_index = randi() % filtered_questions.size()
 		var selected_question = filtered_questions[random_index]
+
+		current_question_data = selected_question
+
 		var question = str(selected_question.get("question", ""))
 		var answer = selected_question.get("answers", [])
 
@@ -441,7 +446,5 @@ func _emit_current() -> void:
 		answered_question_count.emit(current_question)
 		difficulty_changed.emit(difficulty)
 		allowed_strikes_changed.emit(allowed_strikes)
-		wrongly_answered_changed.emit(current_wrong_answers)
-		correctly_answered_changed.emit(current_correct_answers)
 	else:
 		print("ERROR: No questions available for difficulty: ", difficulty)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnfpl88fjql2s"]
+[gd_scene load_steps=8 format=3 uid="uid://cnfpl88fjql2s"]
 
 [ext_resource type="Script" uid="uid://dihhfwjd3q8rv" path="res://Scripts/pause_menu.gd" id="1_emv3i"]
 [ext_resource type="Shader" uid="uid://doflmmuvqrque" path="res://Assets/Shader/pause_menu.gdshader" id="2_k0w1u"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="3_1och7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1och7"]
 shader = ExtResource("2_k0w1u")
@@ -115,30 +116,35 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Resume"
+script = ExtResource("3_1och7")
 
 [node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Settings"
+script = ExtResource("3_1och7")
 
 [node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Credits"
+script = ExtResource("3_1och7")
 
 [node name="ExitToMainMenu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Exit to main menu"
+script = ExtResource("3_1och7")
 
 [node name="QuitGame" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Quit game"
+script = ExtResource("3_1och7")
 
 [node name="Blur" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

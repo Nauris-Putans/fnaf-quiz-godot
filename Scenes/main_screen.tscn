@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtnm54c7bo3a4"]
+[gd_scene load_steps=3 format=3 uid="uid://dtnm54c7bo3a4"]
 
 [ext_resource type="Script" uid="uid://cnuq3o8lrhk62" path="res://Scripts/main_screen.gd" id="1_p8vjv"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_b1vw1"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -47,24 +48,28 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Start"
+script = ExtResource("2_b1vw1")
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Settings"
+script = ExtResource("2_b1vw1")
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Credits"
+script = ExtResource("2_b1vw1")
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Exit"
+script = ExtResource("2_b1vw1")
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]

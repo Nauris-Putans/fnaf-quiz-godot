@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bufctfqldyioo"]
+[gd_scene load_steps=5 format=3 uid="uid://bufctfqldyioo"]
 
 [ext_resource type="Script" uid="uid://bqqbdglw00a1b" path="res://Scripts/end_screen.gd" id="1_f2mtv"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_1gwaw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2mtv"]
 bg_color = Color(0.6, 0.84313726, 0.31764707, 1)
@@ -37,6 +38,7 @@ script = ExtResource("1_f2mtv")
 
 [node name="Win" type="Control" parent="UI"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -88,10 +90,10 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Main menu"
+script = ExtResource("2_1gwaw")
 
 [node name="Lost" type="Control" parent="UI"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -143,9 +145,11 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Restart"
+script = ExtResource("2_1gwaw")
 
 [node name="MainMenu2" type="Button" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Main menu"
+script = ExtResource("2_1gwaw")

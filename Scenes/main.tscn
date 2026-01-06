@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=16 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://xpskky06ja4y" path="res://Scripts/main.gd" id="1_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="2_6bp64"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnfpl88fjql2s" path="res://Scenes/pause_menu.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d0svccjkkxd00" path="res://Scenes/debugger.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="7_344ge"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
 atlas = ExtResource("2_6bp64")
@@ -72,15 +73,22 @@ ui_layer = NodePath("../UI")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ScreenStatic" type="AnimatedSprite2D" parent="UI"]
-modulate = Color(1, 1, 1, 0.5764706)
+[node name="Jumpscare" parent="UI" instance=ExtResource("4_jjvhh")]
+unique_name_in_owner = true
+visible = false
 z_index = 10
+
+[node name="ScreenStatic" type="AnimatedSprite2D" parent="UI"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.94509804)
+z_index = 9
 position = Vector2(576.00006, 324)
 scale = Vector2(3.9930558, 4)
 sprite_frames = SubResource("SpriteFrames_jkdf5")
 autoplay = "default"
-frame = 2
-frame_progress = 0.99812067
+frame = 5
+frame_progress = 0.11622033
 metadata/_aseprite_wizard_interface_config_ = {
 "layer_section": false,
 "pending_changes": {
@@ -100,10 +108,10 @@ metadata/_aseprite_wizard_interface_config_ = {
 
 [node name="Clock" parent="UI" instance=ExtResource("2_bo1nx")]
 unique_name_in_owner = true
+z_index = 8
 
 [node name="Debugger" parent="UI" instance=ExtResource("3_8gbba")]
 unique_name_in_owner = true
-visible = false
 z_index = 4000
 
 [node name="QuestionLabel" type="Label" parent="UI"]
@@ -138,25 +146,25 @@ size_flags_vertical = 4
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Answer 1"
+script = ExtResource("7_344ge")
 
 [node name="AnswerButton2" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Answer 2"
+script = ExtResource("7_344ge")
 
 [node name="AnswerButton3" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Answer 3"
+script = ExtResource("7_344ge")
 
 [node name="AnswerButton4" type="Button" parent="UI/AnswerContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Answer 4"
-
-[node name="Jumpscare" parent="UI" instance=ExtResource("4_jjvhh")]
-unique_name_in_owner = true
-visible = false
+script = ExtResource("7_344ge")
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 100

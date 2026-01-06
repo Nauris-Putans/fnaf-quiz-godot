@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ovdnf3fik7gx"]
+[gd_scene load_steps=8 format=3 uid="uid://ovdnf3fik7gx"]
 
 [ext_resource type="Script" uid="uid://ray17607junp" path="res://Autoloads/AudioManager.gd" id="1_4tj6f"]
+[ext_resource type="AudioStream" uid="uid://cm0hwxw7fb0hs" path="res://Assets/Audio/Music/dim_existance.mp3" id="2_5kf6k"]
+[ext_resource type="AudioStream" uid="uid://dwowcnilde2ac" path="res://Assets/Audio/Sfx/jumpscare.wav" id="3_tnn7g"]
+[ext_resource type="AudioStream" uid="uid://bawux4tbaxnpf" path="res://Assets/Audio/Sfx/mouse-click.ogg" id="4_lwpe1"]
+[ext_resource type="AudioStream" uid="uid://dal5hqekq0rq" path="res://Assets/Audio/Sfx/correct.wav" id="5_jmilc"]
+[ext_resource type="AudioStream" uid="uid://bgkh2op0hy5b2" path="res://Assets/Audio/Sfx/error.wav" id="6_5nrbi"]
+[ext_resource type="AudioStream" uid="uid://d07ng1rocbujs" path="res://Assets/Audio/Sfx/hovering.wav" id="7_pn88s"]
 
 [node name="AudioManager" type="Node"]
 process_mode = 3
@@ -12,8 +18,30 @@ unique_name_in_owner = true
 
 [node name="Main" type="AudioStreamPlayer" parent="Clips"]
 unique_name_in_owner = true
+stream = ExtResource("2_5kf6k")
 bus = &"Music"
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="Clips"]
 unique_name_in_owner = true
+stream = ExtResource("3_tnn7g")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("4_lwpe1")
+bus = &"SFX"
+
+[node name="Correct" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("5_jmilc")
+bus = &"SFX"
+
+[node name="Incorrect" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("6_5nrbi")
+bus = &"SFX"
+
+[node name="Hover" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("7_pn88s")
 bus = &"SFX"
