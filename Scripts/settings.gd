@@ -16,9 +16,4 @@ func _on_back_pressed() -> void:
 	if use_signal_back:
 		back_requested.emit()
 	else:
-		SceneManager.swap_scenes(
-			"res://Scenes/main_screen.tscn",
-			get_tree().root,
-			self,
-			"fade_to_black",
-		)
+		SceneManager.swap_scenes(back_scene_path, get_tree().root, self, "fade_to_black")

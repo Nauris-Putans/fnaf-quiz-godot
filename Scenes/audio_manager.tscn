@@ -20,6 +20,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 stream = ExtResource("2_5kf6k")
 bus = &"Music"
+parameters/looping = true
 
 [node name="Jumpscare" type="AudioStreamPlayer" parent="Clips"]
 unique_name_in_owner = true

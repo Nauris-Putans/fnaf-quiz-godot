@@ -84,7 +84,7 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 script = ExtResource("2_lhmql")
-audio_bus_name = "Master"
+audio_bus_name = &"Master"
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
@@ -108,7 +108,6 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 script = ExtResource("2_lhmql")
-audio_bus_name = "Music"
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
@@ -132,10 +131,11 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 script = ExtResource("2_lhmql")
-audio_bus_name = "SFX"
+audio_bus_name = &"SFX"
 metadata/_edit_use_anchors_ = true
 
 [node name="FullScreenControl" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Full screen"

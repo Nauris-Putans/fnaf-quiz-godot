@@ -3,6 +3,7 @@ extends Control
 class_name MainScreen
 
 func _ready():
+	SettingsManager.apply_all()
 	AudioManager.play("Main", 0, true)
 
 
