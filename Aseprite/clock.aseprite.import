@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://2rl4hvyoi5rl"
+path="res://.godot/imported/clock.aseprite-d1638b01bf20a5842fcd17df057905e5.res"
+
+[deps]
+
+source_file="res://Aseprite/clock.aseprite"
+dest_files=["res://.godot/imported/clock.aseprite-d1638b01bf20a5842fcd17df057905e5.res"]
+
+[params]
+

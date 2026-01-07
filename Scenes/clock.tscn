@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8p0plxounngf"]
+[gd_scene load_steps=3 format=3 uid="uid://b8p0plxounngf"]
 
 [ext_resource type="Script" uid="uid://cu4o4nmmet2cs" path="res://Scripts/clock.gd" id="1_psxnr"]
+[ext_resource type="Texture2D" uid="uid://byon1csjx77cn" path="res://Aseprite/clock.png" id="2_pdqta"]
 
 [node name="Clock" type="Control"]
 layout_mode = 3
@@ -12,18 +13,26 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_psxnr")
 
-[node name="Label" type="Label" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1030.9229, 75.58721)
+scale = Vector2(1.0089737, 1.0089737)
+texture = ExtResource("2_pdqta")
+region_enabled = true
+region_rect = Rect2(0, 0, 196, 92)
+
+[node name="Label" type="Label" parent="Sprite2D"]
 unique_name_in_owner = true
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.984
 anchor_top = 0.016
 anchor_right = 0.984
 anchor_bottom = 0.049
-offset_left = -1.0
-offset_bottom = 23.0
+offset_left = -257.46893
+offset_top = -33.354927
+offset_right = -124.46892
+offset_bottom = 57.609074
 grow_horizontal = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 6
-theme_override_font_sizes/font_size = 46
+theme_override_font_sizes/font_size = 44
 text = "12 AM"
