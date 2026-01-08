@@ -22,16 +22,17 @@ region_rect = Rect2(0, 0, 196, 92)
 
 [node name="Label" type="Label" parent="Sprite2D"]
 unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 0.984
-anchor_top = 0.016
-anchor_right = 0.984
-anchor_bottom = 0.049
-offset_left = -257.46893
-offset_top = -33.354927
-offset_right = -124.46892
-offset_bottom = 57.609074
-grow_horizontal = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.33655
+offset_top = -76.31517
+offset_right = -30.336548
+offset_bottom = 17.684826
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 6
 theme_override_font_sizes/font_size = 44

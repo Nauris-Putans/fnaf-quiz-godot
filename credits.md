@@ -53,3 +53,4 @@ https://www.youtube.com/watch?v=xe5IJgggbVI - Godot - Audio Manager - Tutorial
 https://www.youtube.com/watch?v=Egf2jgET3nQ, https://github.com/Aarimous/AudioManager - How I do Sound Effects in Godot
 https://www.youtube.com/watch?v=aA2fhLHIsj0 - Intro Scene – Godot 4.4 Tutorial
 https://www.youtube.com/watch?v=JEQR4ALlwVU - Pause menu
+https://www.youtube.com/watch?v=xshNRKs5OwE - Mute audio

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://63a5s3tk6gtv"]
+[gd_scene load_steps=8 format=3 uid="uid://63a5s3tk6gtv"]
 
 [ext_resource type="Script" uid="uid://bca4ri4k216mk" path="res://Scripts/settings.gd" id="1_4geyq"]
 [ext_resource type="Script" uid="uid://br4cw8g7n5umu" path="res://Scripts/audio_manager.gd" id="2_lhmql"]
 [ext_resource type="Script" uid="uid://yu4dw8dpu7l1" path="res://Scripts/full_screen_control.gd" id="3_aaqfp"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="4_aaqfp"]
+[ext_resource type="Script" uid="uid://bh72lkv2psmwo" path="res://Scripts/mute.gd" id="4_j2dne"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lhmql"]
 color = Color(1, 1, 1, 1)
@@ -141,6 +142,13 @@ mouse_default_cursor_shape = 2
 text = "Full screen"
 script = ExtResource("3_aaqfp")
 
+[node name="Mute" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Mute"
+script = ExtResource("4_j2dne")
+
 [node name="Back" type="Button" parent="Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -153,4 +161,5 @@ script = ExtResource("4_aaqfp")
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" method="_on_value_changed"]
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" method="_on_value_changed"]
 [connection signal="toggled" from="Panel/MarginContainer/VBoxContainer2/FullScreenControl" to="Panel/MarginContainer/VBoxContainer2/FullScreenControl" method="_on_toggled"]
+[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer2/Mute" to="Panel/MarginContainer/VBoxContainer2/Mute" method="_on_toggled"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]

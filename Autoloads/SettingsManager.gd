@@ -5,6 +5,7 @@ var bus_volume_db: Dictionary = { }
 
 # Fullscreen preference (session only)
 var fullscreen: bool = false
+var mute: bool = false
 
 
 func _ready() -> void:
@@ -21,6 +22,8 @@ func _cache_defaults() -> void:
 
 	# Cache current window mode as default
 	fullscreen = (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN)
+	var master_id := AudioServer.get_bus_index("Master")
+	mute = AudioServer.is_bus_mute(master_id) if master_id != -1 else false
 
 
 func set_bus_volume_db(bus_name: StringName, db: float) -> void:
@@ -44,6 +47,11 @@ func set_fullscreen(enabled: bool) -> void:
 	)
 
 
+func set_mute(is_audio_muted: bool) -> void:
+	mute = is_audio_muted
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), is_audio_muted)
+
+
 func apply_all() -> void:
 	# Apply all cached bus volumes
 	for bus_name in bus_volume_db.keys():
@@ -51,6 +59,7 @@ func apply_all() -> void:
 
 	# Apply fullscreen
 	set_fullscreen(fullscreen)
+	set_mute(mute)
 
 
 func _apply_bus(bus_name: StringName) -> void:
