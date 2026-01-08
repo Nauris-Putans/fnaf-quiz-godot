@@ -1,7 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtnm54c7bo3a4"]
+[gd_scene load_steps=16 format=3 uid="uid://dtnm54c7bo3a4"]
 
 [ext_resource type="Script" uid="uid://cnuq3o8lrhk62" path="res://Scripts/main_screen.gd" id="1_p8vjv"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_b1vw1"]
+[ext_resource type="Texture2D" uid="uid://b33xhxtfulhce" path="res://Aseprite/main-menu.png" id="2_wi85j"]
+[ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="4_y1wm0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1vw1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wi85j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y1wm0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qm5cq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
+atlas = ExtResource("4_y1wm0")
+region = Rect2(0, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynf5e"]
+atlas = ExtResource("4_y1wm0")
+region = Rect2(288, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hptm8"]
+atlas = ExtResource("4_y1wm0")
+region = Rect2(576, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1ilt"]
+atlas = ExtResource("4_y1wm0")
+region = Rect2(864, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyac"]
+atlas = ExtResource("4_y1wm0")
+region = Rect2(1152, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdnlq"]
+atlas = ExtResource("4_y1wm0")
+region = Rect2(1440, 0, 288, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qm5cq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_344ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynf5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hptm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1ilt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdnlq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,66 +72,112 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p8vjv")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -297.0
-offset_top = 98.0
-offset_right = 297.0
-offset_bottom = 175.0
-grow_horizontal = 2
+[node name="MainBackground" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("2_wi85j")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 91.0
+offset_right = 294.0
+offset_bottom = 522.0
+theme_override_constants/separation = 35
+
+[node name="Title" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -20
 theme_override_constants/shadow_offset_y = 6
 theme_override_font_sizes/font_size = 36
-text = "Night Shift: Horror Quiz"
-horizontal_alignment = 1
+text = "Night
+Shift:
+Horror
+Quiz"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.0
-offset_top = -102.0
-offset_right = 143.0
-offset_bottom = 102.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 12
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="Start" type="Button" parent="VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b1vw1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b1vw1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b1vw1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b1vw1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b1vw1")
 text = "Start"
 script = ExtResource("2_b1vw1")
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wi85j")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wi85j")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wi85j")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wi85j")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wi85j")
 text = "Settings"
 script = ExtResource("2_b1vw1")
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
+[node name="Credits" type="Button" parent="VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y1wm0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_y1wm0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y1wm0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_y1wm0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_y1wm0")
 text = "Credits"
 script = ExtResource("2_b1vw1")
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
+[node name="Exit" type="Button" parent="VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qm5cq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qm5cq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qm5cq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qm5cq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qm5cq")
 text = "Exit"
 script = ExtResource("2_b1vw1")
 
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[node name="ScreenStatic" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.09019608)
+z_index = 9
+position = Vector2(576.00006, 324)
+scale = Vector2(3.9930558, 4)
+sprite_frames = SubResource("SpriteFrames_qm5cq")
+autoplay = "default"
+frame_progress = 0.13576403
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"pending_changes": {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"scale": "1.0",
+"should_round_fps": true,
+"slice": "",
+"source": "",
+"source_uid": -1
+}
+}
+
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
