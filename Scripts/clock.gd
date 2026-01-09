@@ -8,7 +8,7 @@ signal hour_changed(hour_text: String)
 signal seconds_left_changed(seconds_left: int)
 signal current_hour_changed(hour: int)
 
-const SECONDS_BETWEEN_HOURS: int = 60
+const SECONDS_BETWEEN_HOURS: int = 45
 
 @onready var label: Label = %Label
 @onready var debugger: Debugger = %Debugger

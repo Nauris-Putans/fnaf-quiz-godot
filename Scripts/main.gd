@@ -9,6 +9,7 @@ extends Control
 @onready var screen_static: AnimatedSprite2D = %ScreenStatic
 
 var allowed_strikes: int = 3
+var _answers_locked := false
 
 
 func _ready():
@@ -56,28 +57,46 @@ func update_screen_static(count: int) -> void:
 		# No wrong answers - hide static
 		screen_static.hide()
 		screen_static.modulate.a = 0
-	else:
-		# Show static briefly with intensity
-		screen_static.show()
+		return
 
-		# Formula: fewer allowed_strikes = more intense static
-		var base_intensity = 1.0 / allowed_strikes
-		var alpha = count * base_intensity
-		screen_static.modulate.a = min(alpha, 0.8)
+	# Disable answering while static is shown
+	_set_answers_enabled(false)
 
-		# Fade out after 1.5 seconds
-		await get_tree().create_timer(1).timeout
+	# Show static briefly with intensity
+	screen_static.show()
 
-		# Fade out animation
-		var tween = create_tween()
-		tween.tween_property(screen_static, "modulate:a", 0.0, 0.5)
-		await tween.finished
+	# Formula: fewer allowed_strikes = more intense static
+	var base_intensity = 1.0 / allowed_strikes
+	var alpha = count * base_intensity
+	screen_static.modulate.a = min(alpha, 0.8)
 
-		screen_static.hide()
+	# Fade out after 1 seconds
+	await get_tree().create_timer(1).timeout
+
+	# Fade out animation
+	var tween = create_tween()
+	tween.tween_property(screen_static, "modulate:a", 0.0, 0.5)
+	await tween.finished
+
+	screen_static.hide()
+
+	# Only ask next question if game isn't over
+	if not GameManager.run_over:
+		GameManager.next_question()
 
 
 func set_allowed_strikes(strikes: int) -> void:
 	allowed_strikes = strikes
+
+
+func _set_answers_enabled(enabled: bool) -> void:
+	_answers_locked = not enabled
+
+	for child in answer_container.get_children():
+		var button := child as Button
+		if button:
+			button.disabled = not enabled
+			button.mouse_filter = Control.MOUSE_FILTER_STOP if enabled else Control.MOUSE_FILTER_IGNORE
 
 
 # Toggle debbuger
@@ -109,12 +128,19 @@ func _on_answers_changed(answers: Array) -> void:
 		if button:
 			button.text = str(answers[index])
 
+	_set_answers_enabled(true)
+
 
 func _on_question_randomize() -> void:
 	GameManager.randomize_questions_and_emit_current()
 
 
 func _on_answer_pressed(index: int) -> void:
+	if _answers_locked:
+		return
+
+	_set_answers_enabled(false)
+	get_viewport().gui_release_focus()
 	GameManager.player_answer(index)
 
 
@@ -123,6 +149,7 @@ func _on_game_won() -> void:
 
 
 func _on_game_lost() -> void:
+	_set_answers_enabled(false)
 	jumpscare.play_animation()
 
 

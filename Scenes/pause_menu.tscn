@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnfpl88fjql2s"]
+[gd_scene load_steps=14 format=3 uid="uid://cnfpl88fjql2s"]
 
 [ext_resource type="Script" uid="uid://dihhfwjd3q8rv" path="res://Scripts/pause_menu.gd" id="1_emv3i"]
 [ext_resource type="Shader" uid="uid://doflmmuvqrque" path="res://Assets/Shader/pause_menu.gdshader" id="2_k0w1u"]
@@ -6,7 +6,20 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1och7"]
 shader = ExtResource("2_k0w1u")
-shader_parameter/amount = 0.0
+shader_parameter/blur_amount = 2.0
+shader_parameter/darken = 0.35
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1och7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpi0q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmyb1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_myy0f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjs17"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8tnp"]
 
 [sub_resource type="Animation" id="Animation_1och7"]
 length = 0.001
@@ -89,6 +102,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+color = Color(1, 0, 0.1871481, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -99,11 +113,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -116.5
-offset_top = -113.0
+offset_top = -93.0
 offset_right = 116.5
-offset_bottom = 113.0
+offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1och7")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -114,35 +129,65 @@ layout_mode = 2
 [node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bpi0q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bpi0q")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bpi0q")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bpi0q")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bpi0q")
 text = "Resume"
 script = ExtResource("3_1och7")
 
 [node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vmyb1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vmyb1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vmyb1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vmyb1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vmyb1")
 text = "Settings"
 script = ExtResource("3_1och7")
 
 [node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_myy0f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_myy0f")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_myy0f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_myy0f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_myy0f")
 text = "Credits"
 script = ExtResource("3_1och7")
 
 [node name="ExitToMainMenu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sjs17")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sjs17")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sjs17")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sjs17")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sjs17")
 text = "Exit to main menu"
 script = ExtResource("3_1och7")
 
 [node name="QuitGame" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u8tnp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u8tnp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u8tnp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_u8tnp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u8tnp")
 text = "Quit game"
 script = ExtResource("3_1och7")
 

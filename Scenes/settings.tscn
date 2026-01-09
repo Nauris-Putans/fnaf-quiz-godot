@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://63a5s3tk6gtv"]
+[gd_scene load_steps=18 format=3 uid="uid://63a5s3tk6gtv"]
 
 [ext_resource type="Script" uid="uid://bca4ri4k216mk" path="res://Scripts/settings.gd" id="1_4geyq"]
 [ext_resource type="Script" uid="uid://br4cw8g7n5umu" path="res://Scripts/audio_manager.gd" id="2_lhmql"]
 [ext_resource type="Script" uid="uid://yu4dw8dpu7l1" path="res://Scripts/full_screen_control.gd" id="3_aaqfp"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="4_aaqfp"]
 [ext_resource type="Script" uid="uid://bh72lkv2psmwo" path="res://Scripts/mute.gd" id="4_j2dne"]
+[ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="6_6kysc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6kysc"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_lhmql"]
 color = Color(1, 1, 1, 1)
@@ -13,6 +16,58 @@ thickness = 6
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_aaqfp"]
 color = Color(0.41929418, 0.5380844, 1, 1)
 thickness = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vr2p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
+atlas = ExtResource("6_6kysc")
+region = Rect2(0, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynf5e"]
+atlas = ExtResource("6_6kysc")
+region = Rect2(288, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hptm8"]
+atlas = ExtResource("6_6kysc")
+region = Rect2(576, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1ilt"]
+atlas = ExtResource("6_6kysc")
+region = Rect2(864, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iyac"]
+atlas = ExtResource("6_6kysc")
+region = Rect2(1152, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdnlq"]
+atlas = ExtResource("6_6kysc")
+region = Rect2(1440, 0, 288, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vr2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_344ge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynf5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hptm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1ilt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iyac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdnlq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -23,58 +78,54 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4geyq")
 
-[node name="SettingsLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -297.0
-offset_top = 98.0
-offset_right = 297.0
-offset_bottom = 175.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 6
-theme_override_font_sizes/font_size = 36
-text = "Settings"
-horizontal_alignment = 1
-
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = -149.0
-offset_right = 225.0
-offset_bottom = 175.0
+offset_left = -188.5
+offset_top = -224.5
+offset_right = 188.5
+offset_bottom = 224.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="SettingsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 6
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6kysc")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Master" type="Label" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
+[node name="Master" type="Label" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Master"
 horizontal_alignment = 1
 
-[node name="MasterSlider2" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
+[node name="MasterSlider2" type="HSlider" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -88,17 +139,17 @@ script = ExtResource("2_lhmql")
 audio_bus_name = &"Master"
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Music" type="Label" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="Music" type="Label" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Music"
 horizontal_alignment = 1
 
-[node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -111,17 +162,17 @@ value = 1.0
 script = ExtResource("2_lhmql")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="SFX" type="Label" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="SFX" type="Label" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "SFX"
+text = "Special effects"
 horizontal_alignment = 1
 
-[node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -135,31 +186,62 @@ script = ExtResource("2_lhmql")
 audio_bus_name = &"SFX"
 metadata/_edit_use_anchors_ = true
 
-[node name="FullScreenControl" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="FullScreenControl" type="CheckButton" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Full screen"
 script = ExtResource("3_aaqfp")
 
-[node name="Mute" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="Mute" type="CheckButton" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Mute"
 script = ExtResource("4_j2dne")
 
-[node name="Back" type="Button" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="Back" type="Button" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 10
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6vr2p")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6vr2p")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6vr2p")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6vr2p")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6vr2p")
 text = "Back"
 script = ExtResource("4_aaqfp")
 
-[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" method="_on_value_changed"]
-[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" method="_on_value_changed"]
-[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" to="Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" method="_on_value_changed"]
-[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer2/FullScreenControl" to="Panel/MarginContainer/VBoxContainer2/FullScreenControl" method="_on_toggled"]
-[connection signal="toggled" from="Panel/MarginContainer/VBoxContainer2/Mute" to="Panel/MarginContainer/VBoxContainer2/Mute" method="_on_toggled"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]
+[node name="ScreenStatic" type="AnimatedSprite2D" parent="." groups=["screen_static"]]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.09019608)
+z_index = -1
+position = Vector2(576.00006, 324)
+scale = Vector2(3.9930558, 4)
+sprite_frames = SubResource("SpriteFrames_6vr2p")
+autoplay = "default"
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"pending_changes": {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"scale": "1.0",
+"should_round_fps": true,
+"slice": "",
+"source": "",
+"source_uid": -1
+}
+}
+
+[connection signal="value_changed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" to="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer3/MasterSlider2" method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" to="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer2/MusicSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" to="VBoxContainer/Panel/MarginContainer/VBoxContainer2/VBoxContainer/SFXSlider" method="_on_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Panel/MarginContainer/VBoxContainer2/FullScreenControl" to="VBoxContainer/Panel/MarginContainer/VBoxContainer2/FullScreenControl" method="_on_toggled"]
+[connection signal="toggled" from="VBoxContainer/Panel/MarginContainer/VBoxContainer2/Mute" to="VBoxContainer/Panel/MarginContainer/VBoxContainer2/Mute" method="_on_toggled"]
+[connection signal="pressed" from="VBoxContainer/Panel/MarginContainer/VBoxContainer2/Back" to="." method="_on_back_pressed"]

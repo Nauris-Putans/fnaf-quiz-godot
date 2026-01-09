@@ -76,6 +76,7 @@ func _on_settings_pressed() -> void:
 
 	settings_ui = settings_scene.instantiate() as Settings
 	settings_ui.use_signal_back = true
+	settings_ui.show_background_static = false
 	settings_ui.back_requested.connect(_on_settings_back)
 
 	# IMPORTANT:
@@ -97,6 +98,7 @@ func _on_credits_back() -> void:
 	if credits_ui:
 		credits_ui.queue_free()
 		credits_ui = null
+
 	panel.show()
 
 
@@ -109,6 +111,7 @@ func _on_credits_pressed() -> void:
 
 	credits_ui = credits_scene.instantiate() as Credits
 	credits_ui.use_signal_back = true
+	credits_ui.show_background_static = false
 	credits_ui.back_requested.connect(_on_credits_back)
 
 	credits_ui.process_mode = Node.PROCESS_MODE_ALWAYS

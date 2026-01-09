@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=29 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://xpskky06ja4y" path="res://Scripts/main.gd" id="1_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="2_6bp64"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://c0vp53un813hm" path="res://Aseprite/security-office-asset.png" id="7_ynf5e"]
+[ext_resource type="StyleBox" uid="uid://dx34d1eecowkp" path="res://Assets/Shader/pc_button_normal.tres" id="8_d1ilt"]
+[ext_resource type="StyleBox" uid="uid://dv3ve27o3qtg3" path="res://Assets/Shader/pc_button_hover.tres" id="8_hptm8"]
+[ext_resource type="Shader" uid="uid://dp50hdynuvtdb" path="res://Assets/Shader/pixel_screen.gdshader" id="11_6iyac"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
 atlas = ExtResource("2_6bp64")
@@ -60,13 +63,30 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="FontVariation" id="FontVariation_6iyac"]
+baseline_offset = 0.165
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynf5e"]
+
+[sub_resource type="FontVariation" id="FontVariation_fdnlq"]
+baseline_offset = 0.165
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hptm8"]
 
+[sub_resource type="FontVariation" id="FontVariation_jkdf5"]
+baseline_offset = 0.165
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1ilt"]
 
+[sub_resource type="FontVariation" id="FontVariation_wsu2k"]
+baseline_offset = 0.165
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6iyac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdnlq"]
+shader = ExtResource("11_6iyac")
+shader_parameter/pixel_size = 1.0
+shader_parameter/scanline_strength = 0.5
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -85,13 +105,13 @@ ui_layer = NodePath("../UI")
 [node name="Jumpscare" parent="UI" instance=ExtResource("4_jjvhh")]
 unique_name_in_owner = true
 visible = false
-z_index = 10
+z_index = 2002
 
-[node name="ScreenStatic" type="AnimatedSprite2D" parent="UI"]
+[node name="ScreenStatic" type="AnimatedSprite2D" parent="UI" groups=["screen_static"]]
 unique_name_in_owner = true
 visible = false
 modulate = Color(1, 1, 1, 0.94509804)
-z_index = 9
+z_index = 2001
 position = Vector2(576.00006, 324)
 scale = Vector2(3.9930558, 4)
 sprite_frames = SubResource("SpriteFrames_jkdf5")
@@ -130,13 +150,42 @@ visible = false
 z_index = 4000
 
 [node name="PC" type="Sprite2D" parent="UI"]
-position = Vector2(567, 360.25)
+position = Vector2(567, 362.25)
 scale = Vector2(1.066108, 1.066108)
 texture = ExtResource("7_ynf5e")
 region_enabled = true
 region_rect = Rect2(128, 112, 896, 537)
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": false,
+"pending_changes": {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "",
+"source_uid": -1
+}
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/PC"]
+offset_left = -228.86987
+offset_top = -231.91833
+offset_right = 232.62189
+offset_bottom = 35.40918
+color = Color(0.12941177, 0.12156863, 0.14117648, 1)
 
 [node name="ScreenUI" type="Control" parent="UI/PC"]
+z_index = 1
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -144,33 +193,36 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -676.8699
-offset_top = -499.48035
-offset_right = -216.31613
-offset_bottom = -233.09084
+offset_top = -500.41833
+offset_right = -215.37817
+offset_bottom = -233.09082
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="UI/PC/ScreenUI"]
+z_index = 1
 layout_mode = 0
-offset_left = 0.9379883
 offset_top = -0.9379883
-offset_right = 460.55377
-offset_bottom = 266.0
+offset_right = 461.49176
+offset_bottom = 267.3275
 theme_override_constants/separation = 6
 alignment = 1
 
 [node name="QuestionMargin" type="MarginContainer" parent="UI/PC/ScreenUI/VBox"]
+z_index = 1
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
 [node name="QuestionLabel" type="Label" parent="UI/PC/ScreenUI/VBox/QuestionMargin"]
 unique_name_in_owner = true
+z_index = 1
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Question"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -179,66 +231,104 @@ clip_text = true
 
 [node name="AnswerContainer" type="VBoxContainer" parent="UI/PC/ScreenUI/VBox"]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="AnswerButton1" type="Button" parent="UI/PC/ScreenUI/VBox/AnswerContainer"]
-custom_minimum_size = Vector2(180, 0)
+z_index = 1
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ynf5e")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ynf5e")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_ynf5e")
+theme_override_colors/font_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_focus_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_pressed_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_hover_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_disabled_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_fonts/font = SubResource("FontVariation_6iyac")
+theme_override_styles/normal = ExtResource("8_d1ilt")
+theme_override_styles/pressed = ExtResource("8_hptm8")
+theme_override_styles/hover = ExtResource("8_hptm8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_ynf5e")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ynf5e")
+theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 1"
 script = ExtResource("7_344ge")
 
 [node name="AnswerButton2" type="Button" parent="UI/PC/ScreenUI/VBox/AnswerContainer"]
-custom_minimum_size = Vector2(180, 0)
+z_index = 1
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hptm8")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_hptm8")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_hptm8")
+theme_override_colors/font_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_focus_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_pressed_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_hover_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_disabled_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_fonts/font = SubResource("FontVariation_fdnlq")
+theme_override_styles/normal = ExtResource("8_d1ilt")
+theme_override_styles/pressed = ExtResource("8_hptm8")
+theme_override_styles/hover = ExtResource("8_hptm8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_hptm8")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hptm8")
+theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 2"
 script = ExtResource("7_344ge")
 
 [node name="AnswerButton3" type="Button" parent="UI/PC/ScreenUI/VBox/AnswerContainer"]
-custom_minimum_size = Vector2(180, 0)
+z_index = 1
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_d1ilt")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_d1ilt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_d1ilt")
+theme_override_colors/font_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_focus_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_pressed_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_hover_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_disabled_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_fonts/font = SubResource("FontVariation_jkdf5")
+theme_override_styles/normal = ExtResource("8_d1ilt")
+theme_override_styles/pressed = ExtResource("8_hptm8")
+theme_override_styles/hover = ExtResource("8_hptm8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_d1ilt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_d1ilt")
+theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 3"
 script = ExtResource("7_344ge")
 
 [node name="AnswerButton4" type="Button" parent="UI/PC/ScreenUI/VBox/AnswerContainer"]
-custom_minimum_size = Vector2(180, 0)
+z_index = 1
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6iyac")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6iyac")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_6iyac")
+theme_override_colors/font_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_focus_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_colors/font_pressed_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_hover_color = Color(0.12941177, 0.12156863, 0.14117648, 1)
+theme_override_colors/font_disabled_color = Color(0.20784314, 0.5411765, 0.18431373, 1)
+theme_override_fonts/font = SubResource("FontVariation_wsu2k")
+theme_override_styles/normal = ExtResource("8_d1ilt")
+theme_override_styles/pressed = ExtResource("8_hptm8")
+theme_override_styles/hover = ExtResource("8_hptm8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_6iyac")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_6iyac")
+theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 4"
 script = ExtResource("7_344ge")
+
+[node name="BBC" type="BackBufferCopy" parent="UI"]
+z_index = 994
+copy_mode = 2
+
+[node name="PixelateRect" type="ColorRect" parent="UI/BBC"]
+z_index = 995
+material = SubResource("ShaderMaterial_fdnlq")
+offset_left = 323.0
+offset_top = 112.0
+offset_right = 815.0
+offset_bottom = 398.0
+mouse_filter = 2
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 100
