@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cin6c5qpcl2nj"
+path="res://.godot/imported/daily-news.aseprite-f356cd95e551ec6956c12fd2f0391a89.res"
+
+[deps]
+
+source_file="res://Aseprite/daily-news.aseprite"
+dest_files=["res://.godot/imported/daily-news.aseprite-f356cd95e551ec6956c12fd2f0391a89.res"]
+
+[params]
+

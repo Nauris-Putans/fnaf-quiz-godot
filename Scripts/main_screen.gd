@@ -8,7 +8,7 @@ func _ready():
 
 
 func _on_start_pressed() -> void:
-	SceneManager.swap_scenes("res://Scenes/main.tscn", get_tree().root, self, "fade_to_black")
+	SceneManager.swap_scenes("res://Scenes/game_intro.tscn", get_tree().root, self, "fade_to_black")
 
 
 func _on_settings_pressed() -> void:

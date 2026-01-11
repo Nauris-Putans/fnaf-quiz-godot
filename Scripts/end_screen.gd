@@ -2,48 +2,53 @@ extends Control
 
 class_name EndScreen
 
-@onready var lost: Control = %Lost
-@onready var win: Control = %Win
-@onready var main_menu_button: Button = %MainMenu
-@onready var main_menu_button_2: Button = %MainMenu2
+@onready var title_label: Label = %Title
+@onready var score: Label = %Score
+@onready var high_score_label: Label = %HighScore
+@onready var breakdown: Label = %Breakdown
+
 @onready var restart_button: Button = %Restart
+@onready var main_menu_button: Button = %MainMenu
 
 
-func _ready():
-	hide_all()
+func _ready() -> void:
+	show()
 
 	var won: bool = bool(GameManager.get_meta("last_result", false))
-	if won:
-		show_win_screen()
-	else:
-		show_lost_screen()
+
+	# Title + which buttons show
+	title_label.text = "You survived!" if won else "Game over"
+	restart_button.visible = not won
+
+	_set_end_scores()
 
 	connect_once(main_menu_button.pressed, _on_main_menu_pressed)
-	connect_once(main_menu_button_2.pressed, _on_main_menu_pressed)
 	connect_once(restart_button.pressed, _on_restart_pressed)
+
+
+func _set_end_scores() -> void:
+	var best_score := int(GameManager.get_meta("high_score", GameManager.high_score))
+	var time_bonus := int(GameManager.get_meta("last_time_bonus", 0))
+	var perfect_bonus := int(GameManager.get_meta("last_perfect_bonus", 0))
+	var total := int(GameManager.get_meta("last_score", 0))
+	var correct := int(GameManager.get_meta("last_correct_answered", 0))
+
+	score.text = "Score: %d" % total
+	high_score_label.text = "High score: %d" % best_score
+	
+	var lines: Array[String] = []
+	lines.append("Correct answers: %d (+%d)" % [correct, correct * 100])
+	lines.append("Time bonus: +%d" % time_bonus)
+
+	if perfect_bonus > 0:
+		lines.append("Perfect run: +%d" % perfect_bonus)
+
+	breakdown.text = "\n".join(lines)
 
 
 func connect_once(sig: Signal, handler: Callable) -> void:
 	if not sig.is_connected(handler):
 		sig.connect(handler)
-
-
-func hide_all() -> void:
-	hide()
-	win.hide()
-	lost.hide()
-
-
-func show_win_screen() -> void:
-	hide_all()
-	show()
-	win.show()
-
-
-func show_lost_screen() -> void:
-	hide_all()
-	show()
-	lost.show()
 
 
 func _on_main_menu_pressed() -> void:

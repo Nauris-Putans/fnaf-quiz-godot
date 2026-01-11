@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://vvxrwpd5hifo"]
+
+[ext_resource type="Script" uid="uid://8cl304kvpkc0" path="res://Scripts/game_intro.gd" id="1_lmodj"]
+[ext_resource type="Texture2D" uid="uid://dqk70ypcovrwc" path="res://Aseprite/daily-news.png" id="1_pcyia"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pcyia"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmodj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fu3k8"]
+line_spacing = -7.0
+font_size = 8
+font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+
+[node name="GameIntro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lmodj")
+
+[node name="Content" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Content"]
+position = Vector2(576, 324)
+texture = ExtResource("1_pcyia")
+region_enabled = true
+region_rect = Rect2(42, 28, 1064, 593)
+
+[node name="Label" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 358.0
+offset_right = 863.0
+offset_bottom = 375.0
+theme_override_colors/font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pcyia")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmodj")
+text = "Family pizzeria seeking night security guard. 12 am to 6 am."
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 375.0
+offset_right = 863.0
+offset_bottom = 412.0
+theme_override_colors/font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pcyia")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmodj")
+text = "Complete security quiz system throughout shift to ensure proper monitoring. System checks for alertness and knowledge of safety protocols."
+label_settings = SubResource("LabelSettings_fu3k8")
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 412.0
+offset_right = 863.0
+offset_bottom = 439.0
+theme_override_colors/font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pcyia")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmodj")
+text = "Failure to answer correctly may result in security system errors. Equipment and animatronic characters require constant surveillance."
+label_settings = SubResource("LabelSettings_fu3k8")
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 439.0
+offset_right = 863.0
+offset_bottom = 456.0
+theme_override_colors/font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pcyia")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmodj")
+text = "Not responsible for injury/dismemberment/death."
+label_settings = SubResource("LabelSettings_fu3k8")
+autowrap_mode = 3
+
+[node name="Label5" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 476.0
+offset_right = 863.0
+offset_bottom = 493.0
+theme_override_colors/font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pcyia")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmodj")
+text = "$120 a week."
+label_settings = SubResource("LabelSettings_fu3k8")
+autowrap_mode = 3
+
+[node name="Label6" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 493.0
+offset_right = 863.0
+offset_bottom = 510.0
+theme_override_colors/font_color = Color(0.13333334, 0.1254902, 0.20392157, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pcyia")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lmodj")
+text = "To apply call: 1-888-FAZ-FAZBEAR"
+label_settings = SubResource("LabelSettings_fu3k8")
+autowrap_mode = 3

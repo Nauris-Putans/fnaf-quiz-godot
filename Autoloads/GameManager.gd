@@ -27,6 +27,11 @@ var current_question_data: Dictionary = { }
 var questions_answered: int = 0
 var run_over: bool = false
 
+var high_score: int = 0
+var current_score: int = 0
+
+var time_bonus_points: int = 0 # accumulated during the run: +10 per second remaining
+
 # pools of indices into question_array (no repeats because we pop)
 var pools: Dictionary = {
 	"easy": [],
@@ -53,6 +58,7 @@ func reset_all_values() -> void:
 	current_question = 0
 	current_hour = 0
 	difficulty = "easy"
+	time_bonus_points = 0
 
 
 func _randomize_allowed_strikes_count() -> void:
@@ -89,6 +95,27 @@ func _build_question_pools() -> void:
 	pools["hard"].shuffle()
 
 
+func finalize_run(won: bool) -> void:
+	var base_points := current_correct_answers * 100
+	var perfect_bonus := 500 if current_wrong_answers == 0 else 0
+
+	current_score = base_points + time_bonus_points + perfect_bonus
+
+	if current_score > high_score:
+		high_score = current_score
+
+	# Store for end screen
+	set_meta("high_score", high_score)
+	set_meta("last_result", won)
+	set_meta("last_score", current_score)
+	set_meta("last_questions_answered", questions_answered)
+	set_meta("last_correct_answered", current_correct_answers)
+	set_meta("last_correct", current_correct_answers)
+	set_meta("last_wrong", current_wrong_answers)
+	set_meta("last_time_bonus", time_bonus_points)
+	set_meta("last_perfect_bonus", perfect_bonus)
+
+
 func on_hour_changed(hour: int) -> void:
 	current_hour = hour
 
@@ -97,6 +124,7 @@ func on_hour_changed(hour: int) -> void:
 
 	if current_hour >= 6:
 		run_over = true
+		finalize_run(true)
 		game_won.emit()
 
 
@@ -115,7 +143,7 @@ func determine_camera_shake_amount() -> float:
 	return clamp(0.25 + 0.15 * float(current_wrong_answers), 0.25, 0.7)
 
 
-func player_answer(index: int) -> void:
+func player_answer(index: int, seconds_remaining: int = 0) -> void:
 	if run_over:
 		return
 
@@ -127,6 +155,10 @@ func player_answer(index: int) -> void:
 		current_correct_answers += 1
 		correctly_answered_changed.emit(current_correct_answers)
 
+		# Time bonus
+		var secs := int(ceil(max(seconds_remaining, 0.0)))
+		time_bonus_points += secs * 10
+
 		_emit_current()
 		return
 
@@ -137,8 +169,10 @@ func player_answer(index: int) -> void:
 
 	if current_wrong_answers >= allowed_strikes:
 		run_over = true
+		finalize_run(false)
 		game_lost.emit()
 		return
+
 
 func next_question() -> void:
 	_emit_current()

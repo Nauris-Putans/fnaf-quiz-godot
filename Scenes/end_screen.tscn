@@ -1,18 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://bufctfqldyioo"]
+[gd_scene load_steps=14 format=3 uid="uid://bufctfqldyioo"]
 
 [ext_resource type="Script" uid="uid://bqqbdglw00a1b" path="res://Scripts/end_screen.gd" id="1_f2mtv"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_1gwaw"]
 [ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="3_bhpww"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhpww"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_em7vc"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gdxnu"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8yanq"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4suit"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fi2y0"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_em7vc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_344ge"]
 atlas = ExtResource("3_bhpww")
@@ -75,14 +71,14 @@ script = ExtResource("1_f2mtv")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Win" type="Control" parent="UI"]
+[node name="Stats" type="Control" parent="UI"]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="ColorRect" type="ColorRect" parent="UI/Win"]
+[node name="ColorRect" type="ColorRect" parent="UI/Stats"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,44 +88,73 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.39215687)
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/Win/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -131.0
-offset_right = 150.0
-offset_bottom = 143.0
+offset_left = -112.5
+offset_top = -141.5
+offset_right = 112.5
+offset_bottom = 141.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_bhpww")
+size_flags_horizontal = 4
+theme_override_constants/separation = 28
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Win/ColorRect/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Win/ColorRect/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="Title" type="Label" parent="UI/Stats/ColorRect/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 6
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gdxnu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4suit")
 text = "You survived!"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats/ColorRect/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 24
 
-[node name="MainMenu" type="Button" parent="UI/Win/ColorRect/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats/ColorRect/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="HighScore" type="Label" parent="UI/Stats/ColorRect/VBoxContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/line_spacing = -10
+text = "High score: 9999"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="UI/Stats/ColorRect/VBoxContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/line_spacing = -10
+text = "Score: 1000"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Stats/ColorRect/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Breakdown" type="Label" parent="UI/Stats/ColorRect/VBoxContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/line_spacing = -10
+text = "Breakdown"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="UI/Stats/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Restart" type="Button" parent="UI/Stats/ColorRect/VBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -139,87 +164,19 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_em7vc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_em7vc")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_em7vc")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_em7vc")
-text = "Main menu"
-script = ExtResource("2_1gwaw")
-
-[node name="Lost" type="Control" parent="UI"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-
-[node name="ColorRect" type="ColorRect" parent="UI/Lost"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.39215687)
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Lost/ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -131.0
-offset_right = 150.0
-offset_bottom = 143.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_gdxnu")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Lost/ColorRect/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 6
-theme_override_font_sizes/font_size = 36
-text = "Game over"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="Restart" type="Button" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8yanq")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_8yanq")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_8yanq")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8yanq")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_8yanq")
 text = "Retry"
 script = ExtResource("2_1gwaw")
 
-[node name="MainMenu2" type="Button" parent="UI/Lost/ColorRect/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="UI/Stats/ColorRect/VBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_fi2y0")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2y0")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_fi2y0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_fi2y0")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fi2y0")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_em7vc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_em7vc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_em7vc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_em7vc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_em7vc")
 text = "Main menu"
 script = ExtResource("2_1gwaw")
 
@@ -247,3 +204,4 @@ metadata/_aseprite_wizard_interface_config_ = {
 "source_uid": -1
 }
 }
+metadata/_edit_lock_ = true

@@ -54,3 +54,4 @@ https://www.youtube.com/watch?v=Egf2jgET3nQ, https://github.com/Aarimous/AudioMa
 https://www.youtube.com/watch?v=aA2fhLHIsj0 - Intro Scene – Godot 4.4 Tutorial
 https://www.youtube.com/watch?v=JEQR4ALlwVU - Pause menu
 https://www.youtube.com/watch?v=xshNRKs5OwE - Mute audio
+https://www.youtube.com/watch?v=acH5Gyhe6Mo - End score

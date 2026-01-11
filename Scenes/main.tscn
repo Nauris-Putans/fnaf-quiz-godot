@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=25 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://xpskky06ja4y" path="res://Scripts/main.gd" id="1_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="2_6bp64"]
@@ -66,22 +66,14 @@ animations = [{
 [sub_resource type="FontVariation" id="FontVariation_6iyac"]
 baseline_offset = 0.165
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynf5e"]
-
 [sub_resource type="FontVariation" id="FontVariation_fdnlq"]
 baseline_offset = 0.165
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hptm8"]
 
 [sub_resource type="FontVariation" id="FontVariation_jkdf5"]
 baseline_offset = 0.165
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d1ilt"]
-
 [sub_resource type="FontVariation" id="FontVariation_wsu2k"]
 baseline_offset = 0.165
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6iyac"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fdnlq"]
 shader = ExtResource("11_6iyac")
@@ -252,7 +244,7 @@ theme_override_fonts/font = SubResource("FontVariation_6iyac")
 theme_override_styles/normal = ExtResource("8_d1ilt")
 theme_override_styles/pressed = ExtResource("8_hptm8")
 theme_override_styles/hover = ExtResource("8_hptm8")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ynf5e")
+theme_override_styles/disabled = ExtResource("8_d1ilt")
 theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 1"
 script = ExtResource("7_344ge")
@@ -272,7 +264,7 @@ theme_override_fonts/font = SubResource("FontVariation_fdnlq")
 theme_override_styles/normal = ExtResource("8_d1ilt")
 theme_override_styles/pressed = ExtResource("8_hptm8")
 theme_override_styles/hover = ExtResource("8_hptm8")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_hptm8")
+theme_override_styles/disabled = ExtResource("8_d1ilt")
 theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 2"
 script = ExtResource("7_344ge")
@@ -292,7 +284,7 @@ theme_override_fonts/font = SubResource("FontVariation_jkdf5")
 theme_override_styles/normal = ExtResource("8_d1ilt")
 theme_override_styles/pressed = ExtResource("8_hptm8")
 theme_override_styles/hover = ExtResource("8_hptm8")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_d1ilt")
+theme_override_styles/disabled = ExtResource("8_d1ilt")
 theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 3"
 script = ExtResource("7_344ge")
@@ -312,7 +304,7 @@ theme_override_fonts/font = SubResource("FontVariation_wsu2k")
 theme_override_styles/normal = ExtResource("8_d1ilt")
 theme_override_styles/pressed = ExtResource("8_hptm8")
 theme_override_styles/hover = ExtResource("8_hptm8")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6iyac")
+theme_override_styles/disabled = ExtResource("8_d1ilt")
 theme_override_styles/focus = ExtResource("8_hptm8")
 text = "Answer 4"
 script = ExtResource("7_344ge")

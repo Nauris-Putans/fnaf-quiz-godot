@@ -141,7 +141,10 @@ func _on_answer_pressed(index: int) -> void:
 
 	_set_answers_enabled(false)
 	get_viewport().gui_release_focus()
-	GameManager.player_answer(index)
+
+	clock.pause_question_timer()
+	var seconds_remaining := clock.get_question_seconds_left()
+	GameManager.player_answer(index, seconds_remaining)
 
 
 func _on_game_won() -> void:

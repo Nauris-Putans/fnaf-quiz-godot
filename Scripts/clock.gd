@@ -18,6 +18,7 @@ var _run_id: int = 0
 var is_paused: bool = false
 var seconds_left_in_hour: int = SECONDS_BETWEEN_HOURS
 var question_timer = 25
+var question_timer_active := true
 
 
 func _ready():
@@ -56,6 +57,10 @@ func clock_status() -> void:
 		_resume() # start again from current_hour
 
 
+func pause_question_timer() -> void:
+	question_timer_active = false
+
+
 func determine_question_timer() -> void:
 	# Determine the timer value based on current hour
 	if current_hour <= 2:
@@ -85,6 +90,9 @@ func _start_counting(run_id: int):
 				return
 
 			seconds_left_in_hour -= 1
+			question_timer -= 1
+
+		if question_timer_active:
 			question_timer -= 1
 
 			if question_timer == 0:
@@ -119,3 +127,7 @@ func _on_debugger_time_passed_buttton_pressed() -> void:
 	hour_changed.emit(label.text)
 	seconds_left_changed.emit(0)
 	six_am_reached.emit()
+
+
+func get_question_seconds_left() -> int:
+	return max(question_timer, 0)
