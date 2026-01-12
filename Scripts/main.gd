@@ -91,12 +91,11 @@ func set_allowed_strikes(strikes: int) -> void:
 
 func _set_answers_enabled(enabled: bool) -> void:
 	_answers_locked = not enabled
-
 	for child in answer_container.get_children():
 		var button := child as Button
 		if button:
 			button.disabled = not enabled
-			button.mouse_filter = Control.MOUSE_FILTER_STOP if enabled else Control.MOUSE_FILTER_IGNORE
+			button.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
 # Toggle debbuger
@@ -110,25 +109,40 @@ func _connect_answer_buttons_once() -> void:
 
 	for child in answer_container.get_children():
 		var button: Button = child as Button
-
 		if button:
+			button.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE # IMPORTANT
+			button.toggle_mode = false
+			button.focus_mode = Control.FOCUS_NONE
+
 			if not button.pressed.is_connected(_on_answer_pressed.bind(index)):
 				button.pressed.connect(_on_answer_pressed.bind(index))
+
 		index += 1
 
 
 func _on_question_changed(text: String) -> void:
-	question_label.text = text
+	if question_label.has_method("set_fit_text"):
+		question_label.call("set_fit_text", text)
+	else:
+		question_label.text = text
 
 
 func _on_answers_changed(answers: Array) -> void:
-	for index in range(min(answer_container.get_child_count(), answers.size())):
-		var button: Button = answer_container.get_child(index) as Button
+	# Update texts
+	for i in range(answer_container.get_child_count()):
+		var button := answer_container.get_child(i) as Button
+		if not button:
+			continue
 
-		if button:
-			button.text = str(answers[index])
+		if i < answers.size():
+			button.text = str(answers[i])
+			button.visible = true
+		else:
+			button.text = ""
+			button.visible = false # hide extra buttons if any
 
-	_set_answers_enabled(true)
+	# Re-enable AFTER this event finishes (prevents “stuck disabled”)
+	call_deferred("_set_answers_enabled", true)
 
 
 func _on_question_randomize() -> void:
@@ -139,7 +153,12 @@ func _on_answer_pressed(index: int) -> void:
 	if _answers_locked:
 		return
 
-	_set_answers_enabled(false)
+	_answers_locked = true
+	for child in answer_container.get_children():
+		var b := child as Button
+		if b:
+			b.set_deferred("disabled", true)
+
 	get_viewport().gui_release_focus()
 
 	clock.pause_question_timer()

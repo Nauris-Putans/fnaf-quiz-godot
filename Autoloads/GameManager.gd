@@ -23,13 +23,15 @@ var current_hour: int = 0
 var current_correct_answers: int = 0
 var difficulty = "easy"
 
+var _rng := RandomNumberGenerator.new()
+var shuffle_answers_each_question := true # you can toggle this later
+
 var current_question_data: Dictionary = { }
 var questions_answered: int = 0
 var run_over: bool = false
 
 var high_score: int = 0
 var current_score: int = 0
-
 var time_bonus_points: int = 0 # accumulated during the run: +10 per second remaining
 
 # pools of indices into question_array (no repeats because we pop)
@@ -47,6 +49,7 @@ func start_run() -> void:
 	run_over = false
 	questions_answered = 0
 	randomize()
+	_rng.randomize()
 	_build_question_pools()
 	_emit_current()
 
@@ -93,6 +96,81 @@ func _build_question_pools() -> void:
 	pools["easy"].shuffle()
 	pools["medium"].shuffle()
 	pools["hard"].shuffle()
+
+
+func _emit_question_by_index(q_index: int) -> void:
+	current_question_data = question_array[q_index]
+
+	var question := String(current_question_data.get("question", ""))
+	var answers: Array[String] = []
+
+	var raw_any: Variant = current_question_data.get("answers", [])
+	if raw_any is Array:
+		for a in raw_any:
+			answers.append(String(a))
+
+	question_changed.emit(question)
+	answers_changed.emit(answers)
+	determine_question_timer.emit()
+	difficulty_changed.emit(determnie_game_difficulty_based_on_current_hour())
+	allowed_strikes_changed.emit(allowed_strikes)
+	answered_question_count.emit(questions_answered)
+
+
+func randomize_questions_and_emit_current() -> void:
+	if run_over:
+		return
+
+	var diff := determnie_game_difficulty_based_on_current_hour()
+	var pool: Array = pools.get(diff, [])
+
+	if pool.is_empty():
+		push_warning("No more '%s' questions left." % diff)
+		return
+
+	# Pick random element from remaining pool (still no repeats)
+	var pick_i: int = randi_range(0, pool.size() - 1)
+	var q_index: int = int(pool.pop_at(pick_i))
+	pools[diff] = pool
+
+	_emit_question_by_index(q_index)
+
+
+func _shuffle_answers_keep_correct(q: Dictionary) -> Dictionary:
+	var out := q.duplicate(true) # deep copy so we don't mutate the bank
+
+	var answers_any: Variant = out.get("answers", [])
+	if not (answers_any is Array):
+		return out
+
+	var answers: Array = answers_any
+	var correct_index: int = int(out.get("correct", -1))
+	if answers.size() < 2 or correct_index < 0 or correct_index >= answers.size():
+		return out
+
+	# Build [text, is_correct] pairs
+	var paired: Array = []
+	for i in range(answers.size()):
+		paired.append([String(answers[i]), i == correct_index])
+
+	# Fisher–Yates shuffle with our RNG
+	for i in range(paired.size() - 1, 0, -1):
+		var j := _rng.randi_range(0, i)
+		var tmp = paired[i]
+		paired[i] = paired[j]
+		paired[j] = tmp
+
+	# Rebuild answers + find new correct
+	var new_answers: Array = []
+	var new_correct := -1
+	for i in range(paired.size()):
+		new_answers.append(paired[i][0])
+		if paired[i][1]:
+			new_correct = i
+
+	out["answers"] = new_answers
+	out["correct"] = new_correct
+	return out
 
 
 func finalize_run(won: bool) -> void:
@@ -204,7 +282,8 @@ func _emit_current() -> void:
 	var q_index: int = int(pool.pop_back())
 	pools[diff] = pool
 
-	current_question_data = question_array[q_index]
+	var raw_q: Dictionary = question_array[q_index]
+	current_question_data = _shuffle_answers_keep_correct(raw_q) if shuffle_answers_each_question else raw_q
 
 	var question := String(current_question_data.get("question", ""))
 	var answers: Array[String] = []

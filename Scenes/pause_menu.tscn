@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1och7"]
 shader = ExtResource("2_k0w1u")
-shader_parameter/blur_amount = 2.0
+shader_parameter/blur_amount = 3.0000001425
 shader_parameter/darken = 0.35
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1och7"]
