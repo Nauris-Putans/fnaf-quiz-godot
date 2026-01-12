@@ -7,6 +7,7 @@ signal six_am_reached
 signal hour_changed(hour_text: String)
 signal seconds_left_changed(seconds_left: int)
 signal current_hour_changed(hour: int)
+signal question_timer_changed(seconds_left: int)
 
 const SECONDS_BETWEEN_HOURS: int = 45
 
@@ -24,9 +25,9 @@ var question_timer_active := true
 func _ready():
 	debugger.time_passed_buttton_pressed.connect(_on_debugger_time_passed_buttton_pressed)
 	debugger.stop_time_button_pressed.connect(clock_status)
-	GameManager.determine_question_timer.connect(determine_question_timer)
-
-	start()
+	question_timer_changed.connect(debugger.on_question_timer_changed)
+	
+	call_deferred("start")
 
 
 func start() -> void:
@@ -62,6 +63,8 @@ func pause_question_timer() -> void:
 
 
 func determine_question_timer() -> void:
+	question_timer_active = true
+
 	# Determine the timer value based on current hour
 	if current_hour <= 2:
 		question_timer = 25
@@ -70,15 +73,16 @@ func determine_question_timer() -> void:
 	else:
 		question_timer = 15
 
+	question_timer_changed.emit(question_timer)
 
-func _start_counting(run_id: int):
+
+func _start_counting(run_id: int) -> void:
 	# Emit initial hour immediately
 	label.text = _get_current_hour_text()
 	hour_changed.emit(label.text)
 	current_hour_changed.emit(current_hour)
 
 	while current_hour < 6:
-		# Count down seconds for this hour
 		while seconds_left_in_hour > 0:
 			if run_id != _run_id or is_paused:
 				return
@@ -90,13 +94,14 @@ func _start_counting(run_id: int):
 				return
 
 			seconds_left_in_hour -= 1
-			question_timer -= 1
 
-		if question_timer_active:
-			question_timer -= 1
+			if question_timer_active:
+				question_timer -= 1
+				question_timer_changed.emit(question_timer)
 
-			if question_timer == 0:
-				GameManager.lose_game()
+				if question_timer <= 0:
+					GameManager.lose_game()
+					return
 
 		if run_id != _run_id:
 			return

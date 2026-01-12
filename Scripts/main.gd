@@ -172,6 +172,8 @@ func _on_game_won() -> void:
 
 func _on_game_lost() -> void:
 	_set_answers_enabled(false)
+	perform_camera_shake(0.7)
+	update_screen_static(3)
 	jumpscare.play_animation()
 
 

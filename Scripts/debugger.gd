@@ -19,6 +19,7 @@ signal stop_time_button_pressed
 @onready var allowed_strikes_label: Label = %AllowedStrikes
 @onready var wrongly_answered_label: Label = %WronglyAnswered
 @onready var correctly_answered_label: Label = %CorrectlyAnswered
+@onready var question_timer_label: Label = %QuestionTimer
 
 var is_time_stopped: bool = false
 
@@ -49,6 +50,13 @@ func on_question_answer_changed(index: int) -> void:
 
 func on_dificultly_changed(difficulty: String) -> void:
 	difficulty_label.text = "Difficulty = %s" % difficulty
+
+
+func on_question_timer_changed(seconds_left: int) -> void:
+	if question_timer_label == null:
+		return
+
+	question_timer_label.text = "Question timer = %d" % seconds_left
 
 
 func on_allowed_strikes_changed(allowed_strikes_count: int) -> void:
