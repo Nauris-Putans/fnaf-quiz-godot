@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://drnbcjol35a6w"]
+[gd_scene load_steps=33 format=3 uid="uid://drnbcjol35a6w"]
 
 [ext_resource type="Script" uid="uid://xpskky06ja4y" path="res://Scripts/main.gd" id="1_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="2_6bp64"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnfpl88fjql2s" path="res://Scenes/pause_menu.tscn" id="2_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d0svccjkkxd00" path="res://Scenes/debugger.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dsfk1ciim4bp8" path="res://Scenes/jumpscare.tscn" id="4_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://6nyuao57mfe2" path="res://Aseprite/security-office-asset1.png" id="7_6iyac"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://c0vp53un813hm" path="res://Aseprite/security-office-asset.png" id="7_ynf5e"]
 [ext_resource type="StyleBox" uid="uid://dx34d1eecowkp" path="res://Assets/Shader/pc_button_normal.tres" id="8_d1ilt"]
@@ -61,6 +62,56 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 60.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkdf5"]
+atlas = ExtResource("7_6iyac")
+region = Rect2(0, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsu2k"]
+atlas = ExtResource("7_6iyac")
+region = Rect2(288, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k12tt"]
+atlas = ExtResource("7_6iyac")
+region = Rect2(576, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1bgf"]
+atlas = ExtResource("7_6iyac")
+region = Rect2(864, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3802"]
+atlas = ExtResource("7_6iyac")
+region = Rect2(1152, 0, 288, 162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fevyy"]
+atlas = ExtResource("7_6iyac")
+region = Rect2(1440, 0, 288, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hibaj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkdf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsu2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k12tt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1bgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3802")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fevyy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
 }]
 
 [sub_resource type="FontVariation" id="FontVariation_6iyac"]
@@ -140,6 +191,12 @@ grow_vertical = 1
 unique_name_in_owner = true
 visible = false
 z_index = 4000
+
+[node name="Background" type="AnimatedSprite2D" parent="UI"]
+position = Vector2(576, 324.00003)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_hibaj")
+autoplay = "default"
 
 [node name="PC" type="Sprite2D" parent="UI"]
 position = Vector2(567, 362.25)
@@ -317,9 +374,9 @@ copy_mode = 2
 z_index = 995
 material = SubResource("ShaderMaterial_fdnlq")
 offset_left = 323.0
-offset_top = 112.0
+offset_top = 115.0
 offset_right = 815.0
-offset_bottom = 398.0
+offset_bottom = 400.0
 mouse_filter = 2
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]

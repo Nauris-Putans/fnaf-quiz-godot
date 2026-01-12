@@ -94,11 +94,6 @@ func _add_loading_screen(transition_type:String="fade_to_black"):
 ## [b][color=plum]scene_to_unload[/color][/b] - [Node] scene you're unloading, leave null to skip unloading step thought YRMV - use with caution[br]
 ## [b][color=plum]transition_type[/color][/b] - [String] name of transition[br] see top of [Door] class for options
 func swap_scenes(scene_to_load:String, load_into:Node=null, scene_to_unload:Node=null, transition_type:String="fade_to_black") -> void:
-	
-	if _loading_in_progress:
-		push_warning("SceneManager is already loading something")
-		return
-	
 	_loading_in_progress = true
 	if load_into == null: load_into = get_tree().root
 	_load_scene_into = load_into

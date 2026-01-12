@@ -16,7 +16,11 @@ func _ready() -> void:
 
 	var won: bool = bool(GameManager.get_meta("last_result", false))
 
-	# Title + which buttons show
+	if won:
+		AudioManager.play("Win")
+	else:
+		AudioManager.play("Lose")
+
 	title_label.text = "You survived!" if won else "Game over"
 	restart_button.visible = not won
 
@@ -35,7 +39,7 @@ func _set_end_scores() -> void:
 
 	score.text = "Score: %d" % total
 	high_score_label.text = "High score: %d" % best_score
-	
+
 	var lines: Array[String] = []
 	lines.append("Correct answers: %d (+%d)" % [correct, correct * 100])
 	lines.append("Time bonus: +%d" % time_bonus)

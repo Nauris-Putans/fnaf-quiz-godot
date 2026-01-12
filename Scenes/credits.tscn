@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://g8gfp0cnhlar"]
+[gd_scene load_steps=12 format=3 uid="uid://g8gfp0cnhlar"]
 
 [ext_resource type="Script" uid="uid://c0dshlx2orynp" path="res://Scripts/credits.gd" id="1_r18jl"]
 [ext_resource type="Script" uid="uid://dtnd08jkrn42r" path="res://Scripts/sfx_button.gd" id="2_gryuy"]
 [ext_resource type="Texture2D" uid="uid://cxpfdg0qpwe3i" path="res://Aseprite/static-noise-exported.png" id="3_ccovl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccovl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bamb"]
 
@@ -69,19 +67,16 @@ script = ExtResource("1_r18jl")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -136.5
-offset_top = -61.5
+offset_top = 45.0
 offset_right = 136.5
-offset_bottom = 61.5
+offset_bottom = 122.0
 grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer2"]
+[node name="Title" type="Label" parent="VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 6
@@ -89,18 +84,92 @@ theme_override_font_sizes/font_size = 36
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ccovl")
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.25
+offset_top = -202.0
+offset_right = 261.25
+offset_bottom = 173.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/MarginContainer"]
+[node name="Credits" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Night Shift: Horror Quiz
+
+Created by
+PapaSmurfDev
+
+---
+
+Made with
+- Godot Engine 4.5
+- Aseprite
+
+---
+
+Special Thanks
+Endija Z.
+c4m3lion
+
+---
+
+Inspired by
+Five Nights at Freddy's by Scott Cawthon
+
+This is a fan-made game and is not affiliated 
+with or endorsed by the official FNAF franchise.
+
+---
+
+Music & Sounds
+
+\"horror ambience 16.wav\" by klankbeeld
+https://freesound.org/s/137109/
+License: CC BY 4.0
+
+\"Eerie Tone Music Background Loop\" by TheDweebMan
+https://freesound.org/s/277192/
+License: CC BY 4.0
+
+\"Wind Chimes\" by mooncubedesign
+https://freesound.org/s/402691/
+License: CC0 (Public Domain)
+
+Additional SFX: CC0 sounds
+
+---
+
+Thank you for playing! <3
+"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.5
+offset_top = 209.0
+offset_right = 136.5
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="Back" type="Button" parent="VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -138,4 +207,4 @@ metadata/_aseprite_wizard_interface_config_ = {
 }
 }
 
-[connection signal="pressed" from="VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

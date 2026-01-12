@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ovdnf3fik7gx"]
+[gd_scene load_steps=11 format=3 uid="uid://ovdnf3fik7gx"]
 
 [ext_resource type="Script" uid="uid://ray17607junp" path="res://Autoloads/AudioManager.gd" id="1_4tj6f"]
 [ext_resource type="AudioStream" uid="uid://cm0hwxw7fb0hs" path="res://Assets/Audio/Music/dim_existance.mp3" id="2_5kf6k"]
@@ -7,6 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://dal5hqekq0rq" path="res://Assets/Audio/Sfx/correct.wav" id="5_jmilc"]
 [ext_resource type="AudioStream" uid="uid://bgkh2op0hy5b2" path="res://Assets/Audio/Sfx/error.wav" id="6_5nrbi"]
 [ext_resource type="AudioStream" uid="uid://d07ng1rocbujs" path="res://Assets/Audio/Sfx/hovering.wav" id="7_pn88s"]
+[ext_resource type="AudioStream" uid="uid://cbxvcdetaw3l0" path="res://Assets/Audio/Music/main_game_music.mp3" id="8_jmilc"]
+[ext_resource type="AudioStream" uid="uid://pg3jbq3i3lss" path="res://Assets/Audio/Music/win_music.mp3" id="9_5nrbi"]
+[ext_resource type="AudioStream" uid="uid://bx7nexb16x04n" path="res://Assets/Audio/Music/lose_music.mp3" id="10_pn88s"]
 
 [node name="AudioManager" type="Node"]
 process_mode = 3
@@ -46,3 +49,21 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("7_pn88s")
 bus = &"SFX"
+
+[node name="Game" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("8_jmilc")
+bus = &"Music"
+parameters/looping = true
+
+[node name="Win" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("9_5nrbi")
+bus = &"Music"
+parameters/looping = true
+
+[node name="Lose" type="AudioStreamPlayer" parent="Clips"]
+unique_name_in_owner = true
+stream = ExtResource("10_pn88s")
+bus = &"Music"
+parameters/looping = true

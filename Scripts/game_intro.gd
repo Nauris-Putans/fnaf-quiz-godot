@@ -10,6 +10,9 @@ var _skipping := false
 
 
 func _ready() -> void:
+	AudioManager.stop_music()
+	AudioManager.play("Game")
+
 	# Scale around center
 	content.anchor_left = 0
 	content.anchor_top = 0
