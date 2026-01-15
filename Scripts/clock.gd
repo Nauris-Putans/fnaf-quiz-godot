@@ -23,10 +23,12 @@ var question_timer_active := true
 
 
 func _ready():
+	GameManager.determine_question_timer.connect(determine_question_timer)
+	GameManager.question_pool_empty.connect(_on_question_pool_empty)
 	debugger.time_passed_buttton_pressed.connect(_on_debugger_time_passed_buttton_pressed)
 	debugger.stop_time_button_pressed.connect(clock_status)
 	question_timer_changed.connect(debugger.on_question_timer_changed)
-	
+
 	call_deferred("start")
 
 
@@ -37,6 +39,11 @@ func start() -> void:
 	seconds_left_in_hour = SECONDS_BETWEEN_HOURS
 	_start_counting.call_deferred(_run_id)
 	determine_question_timer()
+
+
+func _on_question_pool_empty(_diff: String) -> void:
+	# No active question -> don’t tick down to a loss
+	pause_question_timer()
 
 
 func stop() -> void:

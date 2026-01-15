@@ -33,6 +33,8 @@ func _ready():
 	GameManager.game_won.connect(_on_game_won)
 	GameManager.game_lost.connect(_on_game_lost)
 
+	GameManager.question_pool_empty.connect(_on_question_pool_empty)
+
 	# Hook up answer buttons once
 	_connect_answer_buttons_once()
 
@@ -45,6 +47,23 @@ func hide_all() -> void:
 	jumpscare.hide()
 	debugger.hide()
 	reset_screen_static()
+
+
+func _set_answers_visible(visible: bool) -> void:
+	answer_container.visible = visible
+
+
+func _on_question_pool_empty(diff: String) -> void:
+	_answers_locked = true
+	_set_answers_enabled(false)
+	_set_answers_visible(false)
+
+	# Optional: if Debugger has the random button node exposed, disable it too.
+	# If not, just ignore this part.
+	if debugger.has_node("RandomQuestion"): # adjust to your actual path/name
+		(debugger.get_node("RandomQuestion") as Button).disabled = true
+
+	question_label.text = "No more %s questions.\nWaiting for the next hour..." % diff
 
 
 func reset_screen_static() -> void:
@@ -140,6 +159,11 @@ func _on_answers_changed(answers: Array) -> void:
 		else:
 			button.text = ""
 			button.visible = false # hide extra buttons if any
+
+	_set_answers_visible(true)
+
+	if debugger.has_node("RandomQuestion"):
+		(debugger.get_node("RandomQuestion") as Button).disabled = false
 
 	# Re-enable AFTER this event finishes (prevents “stuck disabled”)
 	call_deferred("_set_answers_enabled", true)

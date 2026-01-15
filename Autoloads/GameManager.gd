@@ -11,6 +11,7 @@ signal allowed_strikes_changed(allowed_strikes_count: int)
 signal correctly_answered_changed(correctly_answered_count: int)
 signal wrongly_answered_changed(wrongly_answered_count: int)
 signal camera_shake_amount(amount: float)
+signal question_pool_empty(diff: String)
 
 const QuestionBank = preload("res://Data/questions.gd")
 
@@ -34,6 +35,8 @@ var high_score: int = 0
 var current_score: int = 0
 var time_bonus_points: int = 0 # accumulated during the run: +10 per second remaining
 
+var waiting_for_questions := false
+
 # pools of indices into question_array (no repeats because we pop)
 var pools: Dictionary = {
 	"easy": [],
@@ -45,11 +48,17 @@ var pools: Dictionary = {
 func start_run() -> void:
 	Engine.time_scale = 1
 	reset_all_values()
+	set_meta("super_fan", false)
+
+	# Important: seed RNG before using global randi_range
+	randomize()
+	_rng.randomize()
+
 	_randomize_allowed_strikes_count()
 	run_over = false
 	questions_answered = 0
-	randomize()
-	_rng.randomize()
+	waiting_for_questions = false
+
 	_build_question_pools()
 	_emit_current()
 
@@ -98,8 +107,9 @@ func _build_question_pools() -> void:
 	pools["hard"].shuffle()
 
 
-func _emit_question_by_index(q_index: int) -> void:
-	current_question_data = question_array[q_index]
+func _emit_question_by_index(q_index: int, diff: String) -> void:
+	var raw_q: Dictionary = question_array[q_index]
+	current_question_data = _shuffle_answers_keep_correct(raw_q) if shuffle_answers_each_question else raw_q
 
 	var question := String(current_question_data.get("question", ""))
 	var answers: Array[String] = []
@@ -109,10 +119,12 @@ func _emit_question_by_index(q_index: int) -> void:
 		for a in raw_any:
 			answers.append(String(a))
 
+	_exit_waiting_state()
+
 	question_changed.emit(question)
 	answers_changed.emit(answers)
 	determine_question_timer.emit()
-	difficulty_changed.emit(determnie_game_difficulty_based_on_current_hour())
+	difficulty_changed.emit(diff)
 	allowed_strikes_changed.emit(allowed_strikes)
 	answered_question_count.emit(questions_answered)
 
@@ -121,19 +133,19 @@ func randomize_questions_and_emit_current() -> void:
 	if run_over:
 		return
 
-	var diff := determnie_game_difficulty_based_on_current_hour()
-	var pool: Array = pools.get(diff, [])
+	var preferred := determnie_game_difficulty_based_on_current_hour()
+	var diff := _get_next_available_diff(preferred)
 
-	if pool.is_empty():
-		push_warning("No more '%s' questions left." % diff)
+	if diff == "":
+		_handle_no_questions_left()
 		return
 
-	# Pick random element from remaining pool (still no repeats)
+	var pool: Array = pools.get(diff, [])
 	var pick_i: int = randi_range(0, pool.size() - 1)
 	var q_index: int = int(pool.pop_at(pick_i))
 	pools[diff] = pool
 
-	_emit_question_by_index(q_index)
+	_emit_question_by_index(q_index, diff)
 
 
 func _shuffle_answers_keep_correct(q: Dictionary) -> Dictionary:
@@ -204,6 +216,11 @@ func on_hour_changed(hour: int) -> void:
 		run_over = true
 		finalize_run(true)
 		game_won.emit()
+		return
+
+	# If we were waiting (ran out of questions), try again now that hour/difficulty changed.
+	if waiting_for_questions:
+		_emit_current()
 
 
 func lose_game() -> void:
@@ -222,6 +239,8 @@ func determine_camera_shake_amount() -> float:
 
 
 func player_answer(index: int, seconds_remaining: int = 0) -> void:
+	var _is_headless := DisplayServer.get_name() == "headless"
+
 	if run_over:
 		return
 
@@ -229,7 +248,8 @@ func player_answer(index: int, seconds_remaining: int = 0) -> void:
 	questions_answered += 1
 
 	if index == correct:
-		AudioManager.play("Correct")
+		if not _is_headless:
+			AudioManager.play("Correct")
 		current_correct_answers += 1
 		correctly_answered_changed.emit(current_correct_answers)
 
@@ -240,7 +260,8 @@ func player_answer(index: int, seconds_remaining: int = 0) -> void:
 		_emit_current()
 		return
 
-	AudioManager.play("Incorrect")
+	if not _is_headless:
+		AudioManager.play("Incorrect")
 	current_wrong_answers += 1
 	wrongly_answered_changed.emit(current_wrong_answers)
 	camera_shake_amount.emit(determine_camera_shake_amount())
@@ -265,37 +286,58 @@ func determnie_game_difficulty_based_on_current_hour() -> String:
 	return "hard"
 
 
+func _enter_waiting_state(diff: String) -> void:
+	# Avoid spamming the signal/warning every call
+	if waiting_for_questions:
+		return
+
+	waiting_for_questions = true
+	current_question_data.clear()
+	question_pool_empty.emit(diff)
+	push_warning("No more '%s' questions left (no repeats). Waiting for next hour..." % diff)
+
+
+func _exit_waiting_state() -> void:
+	waiting_for_questions = false
+
+
+func _get_next_available_diff(preferred: String) -> String:
+	var order: Array[String] = ["easy", "medium", "hard"]
+	var start: int = max(order.find(preferred), 0)
+
+	for i: int in range(start, order.size()):
+		var d: String = order[i]
+		var pool: Array = pools.get(d, []) as Array
+		if not pool.is_empty():
+			return d
+
+	return ""
+
+
+func _handle_no_questions_left() -> void:
+	# Player answered ALL questions across all difficulties
+	set_meta("super_fan", true)
+
+	run_over = true
+	finalize_run(true)
+	game_won.emit()
+
+
 func _emit_current() -> void:
 	if run_over:
 		return
 
-	var diff := determnie_game_difficulty_based_on_current_hour()
-	var pool: Array = pools.get(diff, [])
+	var preferred: String = determnie_game_difficulty_based_on_current_hour()
+	var diff: String = _get_next_available_diff(preferred)
 
-	if pool.is_empty():
-		# Strict "no repeats": if you run out, just stop asking questions.
-		# The clock can still run until hour 6.
-		push_warning("No more '%s' questions left (no repeats). Add more questions or reduce question frequency." % diff)
+	if diff == "":
+		_handle_no_questions_left()
 		return
+
+	var pool: Array = pools.get(diff, []) as Array
 
 	# Pop next unique question
 	var q_index: int = int(pool.pop_back())
 	pools[diff] = pool
 
-	var raw_q: Dictionary = question_array[q_index]
-	current_question_data = _shuffle_answers_keep_correct(raw_q) if shuffle_answers_each_question else raw_q
-
-	var question := String(current_question_data.get("question", ""))
-	var answers: Array[String] = []
-
-	var raw_any: Variant = current_question_data.get("answers", [])
-	if raw_any is Array:
-		for a in raw_any:
-			answers.append(String(a))
-
-	question_changed.emit(question)
-	answers_changed.emit(answers)
-	determine_question_timer.emit()
-	difficulty_changed.emit(diff)
-	allowed_strikes_changed.emit(allowed_strikes)
-	answered_question_count.emit(questions_answered)
+	_emit_question_by_index(q_index, diff)

@@ -57,6 +57,9 @@ var _loading_in_progress:bool = false	## internal - used to block SceneManager f
 
 ## Currently only being used to connect to required, internal signals
 func _ready() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+		
 	_content_invalid.connect(_on_content_invalid)
 	_content_failed_to_load.connect(_on_content_failed_to_load)
 	_content_finished_loading.connect(_on_content_finished_loading)

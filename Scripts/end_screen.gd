@@ -22,6 +22,9 @@ func _ready() -> void:
 		AudioManager.play("Lose")
 
 	title_label.text = "You survived!" if won else "Game over"
+
+	if bool(GameManager.get_meta("super_fan", false)):
+		title_label.text = "Super Fan!"
 	restart_button.visible = not won
 
 	_set_end_scores()
@@ -46,6 +49,12 @@ func _set_end_scores() -> void:
 
 	if perfect_bonus > 0:
 		lines.append("Perfect run: +%d" % perfect_bonus)
+
+	var super_fan := bool(GameManager.get_meta("super_fan", false))
+	if super_fan:
+		lines.append("")
+		lines.append("YOU ARE A SUPER FNAF FAN!")
+		lines.append("You answered every question. Great job!")
 
 	breakdown.text = "\n".join(lines)
 
